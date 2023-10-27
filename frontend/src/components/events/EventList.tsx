@@ -16,18 +16,17 @@ interface EventListProps {
 
 const EventList: FC<EventListProps> = ({ events }) => {
   return (
-    <ScrollArea className="h-[500px] w-full p-4">
+    <ScrollArea className="h-[700px] w-full mt-2">
       <Table className="">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[200px]">Nazwa wydarzenia</TableHead>
+            <TableHead className="w-[200px] p-0">Nazwa wydarzenia</TableHead>
             <TableHead>Nazwa Gry</TableHead>
             <TableHead>Data</TableHead>
             <TableHead>Godzina</TableHead>
             <TableHead>Liczba uczestników</TableHead>
           </TableRow>
         </TableHeader>
-
         <TableBody>
           {events.map((event) => (
             <Event event={event} />

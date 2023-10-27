@@ -28,7 +28,7 @@ const Event: FC<EventProps> = ({ event }) => {
 
   return (
     <TableRow key={event.id}>
-      <TableCell>{event.eventName}</TableCell>
+      <TableCell className="p-0">{event.eventName}</TableCell>
       <TableCell>{event.gameName}</TableCell>
       <TableCell>{formattedDateTime}</TableCell>
       <TableCell>{`${startTime}-${endTime}`}</TableCell>
