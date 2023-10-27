@@ -1,5 +1,11 @@
+import Events from "./components/views/Events";
+
 function App() {
-  return <h1 className="text-3xl font-bold">LARPex</h1>;
+  return (
+    <div>
+      <Events />
+    </div>
+  );
 }
 
 export default App;
