@@ -6,6 +6,6 @@ type Store = {
 };
 
 export const useSelectedEvent = create<Store>()((set) => ({
-  selectedEventId: null,
+  selectedEventId: 12,
   setSelectedEventId: (eventId) => set(() => ({ selectedEventId: eventId })),
 }));

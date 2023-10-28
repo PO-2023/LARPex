@@ -5,11 +5,17 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Events from "./views/Events.tsx";
 import Header from "./components/Header.tsx";
+import DialogProvider from "./providers/DialogProvider.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Header />,
+    element: (
+      <>
+        <Header />
+        <DialogProvider />
+      </>
+    ),
     children: [
       {
         path: "/events",
