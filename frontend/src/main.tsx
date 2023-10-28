@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Events from "./components/views/Events.tsx";
+import Events from "./views/Events.tsx";
 import Header from "./components/Header.tsx";
 
 const router = createBrowserRouter([

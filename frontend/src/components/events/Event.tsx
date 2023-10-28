@@ -1,20 +1,16 @@
 import { EventData } from "@/class/EventData";
 import { FC } from "react";
 import { TableCell, TableRow } from "../ui/table";
+import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
+import { cn } from "@/lib/utils";
+import { formatTime } from "@/lib/utils";
 
 interface EventProps {
   event: EventData;
 }
 
-const format = (input: number, padLength: number): string => {
-  return input.toString().padStart(padLength, "0");
-};
-
-const formatTime = (time: number) => {
-  return format(time, 2);
-};
-
 const Event: FC<EventProps> = ({ event }) => {
+  const { selectedEventId, setSelectedEventId } = useSelectedEvent();
   const formattedDateTime = event.dateTime.toLocaleDateString();
 
   const startTime =
@@ -27,8 +23,22 @@ const Event: FC<EventProps> = ({ event }) => {
     formatTime(event.endTime.getMinutes());
 
   return (
-    <TableRow key={event.id}>
-      <TableCell className="p-0">{event.eventName}</TableCell>
+    <TableRow
+      onClick={() => setSelectedEventId(event.id)}
+      key={event.id}
+      className={cn(
+        "cursor-pointer",
+        selectedEventId === event.id && "bg-gray-100 hover:bg-gray-100"
+      )}
+    >
+      <TableCell
+        className={cn(
+          "pl-2",
+          selectedEventId === event.id && "font-bold text-indigo-400"
+        )}
+      >
+        {event.eventName}
+      </TableCell>
       <TableCell>{event.gameName}</TableCell>
       <TableCell>{formattedDateTime}</TableCell>
       <TableCell>{`${startTime}-${endTime}`}</TableCell>

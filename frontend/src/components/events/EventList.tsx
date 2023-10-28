@@ -1,6 +1,5 @@
 import { EventData } from "@/class/EventData";
 import { FC } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -16,24 +15,22 @@ interface EventListProps {
 
 const EventList: FC<EventListProps> = ({ events }) => {
   return (
-    <ScrollArea className="h-[700px] w-full mt-2">
-      <Table className="">
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[200px] p-0">Nazwa wydarzenia</TableHead>
-            <TableHead>Nazwa Gry</TableHead>
-            <TableHead>Data</TableHead>
-            <TableHead>Godzina</TableHead>
-            <TableHead>Liczba uczestników</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {events.map((event) => (
-            <Event event={event} />
-          ))}
-        </TableBody>
-      </Table>
-    </ScrollArea>
+    <Table className="mt-5 sm:mt-5">
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-[200px] pl-2">Nazwa wydarzenia</TableHead>
+          <TableHead>Nazwa Gry</TableHead>
+          <TableHead>Data</TableHead>
+          <TableHead>Godzina</TableHead>
+          <TableHead>Liczba uczestników</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {events.map((event) => (
+          <Event key={event.id} event={event} />
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 
