@@ -1,11 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
-import { CalendarRange, User, Settings, Menu } from "lucide-react";
+import { CalendarRange, User, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import { cn } from "@/lib/utils";
 const Header = () => {
-  let location = useLocation();
+  const location = useLocation();
 
   return (
     <>

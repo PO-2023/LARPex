@@ -1,11 +1,12 @@
+import { EventData } from "@/class/EventData";
 import { create } from "zustand";
 
 type Store = {
-  selectedEventId: number | null;
-  setSelectedEventId: (eventId: number) => void;
+  selectedEvent: EventData | null;
+  setSelectedEvent: (event: EventData) => void;
 };
 
 export const useSelectedEvent = create<Store>()((set) => ({
-  selectedEventId: 12,
-  setSelectedEventId: (eventId) => set(() => ({ selectedEventId: eventId })),
+  selectedEvent: null,
+  setSelectedEvent: (event) => set(() => ({ selectedEvent: event })),
 }));

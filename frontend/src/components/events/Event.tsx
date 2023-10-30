@@ -10,7 +10,7 @@ interface EventProps {
 }
 
 const Event: FC<EventProps> = ({ event }) => {
-  const { selectedEventId, setSelectedEventId } = useSelectedEvent();
+  const { selectedEvent, setSelectedEvent } = useSelectedEvent();
   const formattedDateTime = event.dateTime.toLocaleDateString();
 
   const startTime =
@@ -24,17 +24,17 @@ const Event: FC<EventProps> = ({ event }) => {
 
   return (
     <TableRow
-      onClick={() => setSelectedEventId(event.id)}
+      onClick={() => setSelectedEvent(event)}
       key={event.id}
       className={cn(
         "cursor-pointer",
-        selectedEventId === event.id && "bg-gray-100 hover:bg-gray-100"
+        selectedEvent?.id === event.id && "bg-gray-100 hover:bg-gray-100"
       )}
     >
       <TableCell
         className={cn(
           "pl-2",
-          selectedEventId === event.id && "font-bold text-indigo-400"
+          selectedEvent?.id === event.id && "font-bold text-indigo-400"
         )}
       >
         {event.eventName}
