@@ -11,12 +11,12 @@ interface EventProps {
 
 const Event: FC<EventProps> = ({ event }) => {
   const { selectedEvent, setSelectedEvent } = useSelectedEvent();
-  const formattedDateTime = event.dateTime.toLocaleDateString();
+  const formattedDateTime = event.startTime.toLocaleDateString();
 
   const startTime =
-    formatTime(event.dateTime.getHours()) +
+    formatTime(event.startTime.getHours()) +
     ":" +
-    formatTime(event.dateTime.getMinutes());
+    formatTime(event.endTime.getMinutes());
   const endTime =
     formatTime(event.endTime.getHours()) +
     ":" +
@@ -27,7 +27,7 @@ const Event: FC<EventProps> = ({ event }) => {
       onClick={() => setSelectedEvent(event)}
       key={event.id}
       className={cn(
-        "cursor-pointer",
+        "cursor-pointer text-xs sm:text-sm",
         selectedEvent?.id === event.id && "bg-gray-100 hover:bg-gray-100"
       )}
     >
@@ -39,10 +39,10 @@ const Event: FC<EventProps> = ({ event }) => {
       >
         {event.eventName}
       </TableCell>
-      <TableCell>{event.gameName}</TableCell>
+      <TableCell>{event.game.title}</TableCell>
       <TableCell>{formattedDateTime}</TableCell>
       <TableCell>{`${startTime}-${endTime}`}</TableCell>
-      <TableCell>{`${event.players}/${event.maxPlayers}`}</TableCell>
+      <TableCell>{`${event.players}/${event.game.playerLimit}`}</TableCell>
     </TableRow>
   );
 };

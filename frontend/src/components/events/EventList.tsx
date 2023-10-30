@@ -15,7 +15,7 @@ interface EventListProps {
 
 const EventList: FC<EventListProps> = ({ events }) => {
   return (
-    <Table className="mt-5 sm:mt-5">
+    <Table className="mt-5 sm:mt-5 text-xs sm:text-sm">
       <TableHeader>
         <TableRow>
           <TableHead className="w-[200px] pl-2">Nazwa wydarzenia</TableHead>

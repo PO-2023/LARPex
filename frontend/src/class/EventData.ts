@@ -1,30 +1,41 @@
 export class EventData {
   id: number;
-  dateTime: Date;
+  startTime: Date;
   endTime: Date;
-  gameName: string;
   eventName: string;
-  maxPlayers: number;
   players: number;
   price: number;
+  game: GameData;
 
   constructor(
     id: number,
-    dateTime: Date,
+    startTime: Date,
     endTime: Date,
-    gameName: string,
-    maxPlayers: number,
     players: number,
     price: number,
-    eventName: string
+    eventName: string,
+    game: GameData
   ) {
     this.id = id;
-    this.dateTime = dateTime;
+    this.startTime = startTime;
     this.endTime = endTime;
-    this.gameName = gameName;
-    this.maxPlayers = maxPlayers;
     this.players = players;
     this.price = price;
     this.eventName = eventName;
+    this.game = game;
+  }
+}
+
+export class GameData {
+  id: number;
+  author: string;
+  playerLimit: number;
+  title: string;
+
+  constructor(id: number, author: string, playerLimit: number, title: string) {
+    this.id = id;
+    this.author = author;
+    this.playerLimit = playerLimit;
+    this.title = title;
   }
 }
