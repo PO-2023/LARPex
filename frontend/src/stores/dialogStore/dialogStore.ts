@@ -1,7 +1,7 @@
 import { EventData } from "@/class/EventData";
 import { create } from "zustand";
 
-type DialogType = "DescriptionDialog" | undefined;
+type DialogType = "DescriptionDialog" | "MakePaymentDialog" | "SuccessDialog" | undefined;
 type DialogData = { event: EventData } | undefined;
 
 type Store = {
