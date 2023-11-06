@@ -1,9 +1,12 @@
-export const events = [
+import { EventData } from "@/class/EventData";
+
+export const events: EventData[] = [
   {
     id: 12,
     startTime: new Date(),
     endTime: new Date(),
     eventName: "Wydarzenie 1",
+    status: "Nieopłacone",
     players: 12,
     price: 13,
     game: {
@@ -18,6 +21,7 @@ export const events = [
     startTime: new Date(),
     endTime: new Date(),
     eventName: "Wydarzenie 2",
+    status: "Opłacone",
     players: 12,
     price: 55,
     game: {
@@ -32,6 +36,7 @@ export const events = [
     startTime: new Date(),
     endTime: new Date(),
     eventName: "Wydarzenie 3",
+    status: "Opłacone",
     players: 33,
     price: 101,
     game: {
@@ -46,6 +51,7 @@ export const events = [
     startTime: new Date(),
     endTime: new Date(),
     eventName: "Wydarzenie 4",
+    status: "Nieopłacone",
     players: 33,
     price: 101,
     game: {
@@ -60,6 +66,7 @@ export const events = [
     startTime: new Date(),
     endTime: new Date(),
     eventName: "Wydarzenie 5",
+    status: "Nieopłacone",
     players: 33,
     price: 101,
     game: {
