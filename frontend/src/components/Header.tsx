@@ -6,7 +6,7 @@ import Logo from "./Logo";
 import { cn } from "@/lib/utils";
 const Header = () => {
   const location = useLocation();
-
+  const joinPlay = 12127183;
   return (
     <>
       <header className="w-screen h-20 flex items-center px-3 sm:px-14 justify-between">
@@ -15,6 +15,17 @@ const Header = () => {
         </Link>
         <nav>
           <ul className="flex sm:gap-2">
+          <Link to={`/play/${joinPlay}`}>
+              <Button
+                
+                className={cn(
+                  "cursor-pointer flex hover:text-indigo-400",
+                  
+                )}
+              >
+                Dołącz do gry
+              </Button>
+            </Link>
             <Link to={`/events`}>
               <Button
                 variant="ghost"
@@ -38,6 +49,8 @@ const Header = () => {
             >
               <Settings />
             </Button>
+            
+            
           </ul>
         </nav>
       </header>
