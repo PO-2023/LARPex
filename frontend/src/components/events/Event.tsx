@@ -43,7 +43,6 @@ const Event: FC<EventProps> = ({ event }) => {
       <TableCell>{formattedDateTime}</TableCell>
       <TableCell>{`${startTime}-${endTime}`}</TableCell>
       <TableCell>{`${event.players}/${event.game.playerLimit}`}</TableCell>
-      <TableCell>{event.status}</TableCell>
     </TableRow>
   );
 };

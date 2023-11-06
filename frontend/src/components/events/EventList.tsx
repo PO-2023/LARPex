@@ -23,7 +23,6 @@ const EventList: FC<EventListProps> = ({ events }) => {
           <TableHead>Data</TableHead>
           <TableHead>Godzina</TableHead>
           <TableHead>Liczba uczestników</TableHead>
-          <TableHead>Status</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
