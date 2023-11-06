@@ -1,11 +1,15 @@
 import { Outlet, Link } from "react-router-dom";
-import { CalendarRange, User, Settings } from "lucide-react";
+import { CalendarRange, Settings, Gamepad2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import { cn } from "@/lib/utils";
 const Header = () => {
   const location = useLocation();
+
+  const playActive = location.pathname.includes("play");
+
+  //TODO: Query for active event
   const joinPlay = 12127183;
   return (
     <>
@@ -14,16 +18,20 @@ const Header = () => {
           <Logo />
         </Link>
         <nav>
-          <ul className="flex sm:gap-2">
-          <Link to={`/play/${joinPlay}`}>
+          <ul
+            className={cn(
+              "flex  sm:gap-2 items-center",
+              playActive && "hidden"
+            )}
+          >
+            <Link to={`/play/${joinPlay}`}>
               <Button
-                
                 className={cn(
-                  "cursor-pointer flex hover:text-indigo-400",
-                  
+                  "cursor-pointer flex bg-indigo-500 hover:bg-indigo-400 gap-1 "
                 )}
               >
-                Dołącz do gry
+                <Gamepad2 />
+                <h1 className="hidden sm:block">Dołącz do gry</h1>
               </Button>
             </Link>
             <Link to={`/events`}>
@@ -37,20 +45,13 @@ const Header = () => {
                 <CalendarRange />
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              className="cursor-pointer flex hover:text-indigo-400"
-            >
-              <User />
-            </Button>
+
             <Button
               variant="ghost"
               className="cursor-pointer flex hover:text-indigo-400"
             >
               <Settings />
             </Button>
-            
-            
           </ul>
         </nav>
       </header>
