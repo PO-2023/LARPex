@@ -1,11 +1,13 @@
 package pw.edu.pl.backend.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pw.edu.pl.backend.modelDto.EventDto;
 import pw.edu.pl.backend.service.EventService;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,5 +22,12 @@ public class EventController {
     @GetMapping("/event")
     public List<EventDto> getAllEvents(){
         return eventService.getAllEvents();
+    }
+
+    @GetMapping("/event/{dateFrom}/{dateTo}")
+    public List<EventDto> getEvents(
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date dateFrom,
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date dateTo){
+        return eventService.getEvents(dateFrom, dateTo);
     }
 }
