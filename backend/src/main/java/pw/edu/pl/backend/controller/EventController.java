@@ -1,10 +1,8 @@
 package pw.edu.pl.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pw.edu.pl.backend.modelDto.EnrollEventDTO;
 import pw.edu.pl.backend.modelDto.EventDto;
 import pw.edu.pl.backend.service.EventService;
 
@@ -45,8 +43,13 @@ public class EventController {
         }
     }
 
-    @GetMapping("/event/{id}")
-    public EventDto getEvent(@PathVariable Long id){
-        return eventService.getEventById(id);
+    @GetMapping("/event/{eventId}")
+    public EventDto getEvent(@PathVariable Long eventId){
+        return eventService.getEventById(eventId);
+    }
+
+    @PostMapping("/event/{id}")
+    public EnrollEventDTO enrollToEvent(@PathVariable Long id, @RequestBody Long userId){
+        return eventService.enrollToEvent(id, userId);
     }
 }

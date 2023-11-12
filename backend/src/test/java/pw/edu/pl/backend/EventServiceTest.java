@@ -86,5 +86,11 @@ public class EventServiceTest {
         assertEquals(null, eventDto);
     }
 
+    @Test
+    public void enrollToEvent(){
+        EventService eventService = new EventService();
+        var enrollEventDto = eventService.enrollToEvent(1L, 1L);
+        assertEquals(1L, enrollEventDto.getPaymentId());
+    }
 
 }
