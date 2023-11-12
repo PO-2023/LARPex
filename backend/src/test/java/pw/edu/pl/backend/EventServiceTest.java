@@ -72,5 +72,19 @@ public class EventServiceTest {
         assertEquals(0, eventDtoList.size());
     }
 
+    @Test
+    public void getEventExisting(){
+        EventService eventService = new EventService();
+        var eventDto = eventService.getEventById(1L);
+        assertEquals(1L, eventDto.getId());
+    }
+
+    @Test
+    public void getEventNotExisting(){
+        EventService eventService = new EventService();
+        var eventDto = eventService.getEventById(4L);
+        assertEquals(null, eventDto);
+    }
+
 
 }

@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class EventService implements IEventService {
 
+    @Override
     public List<EventDto> getAllEvents(){
         List<EventDto> eventDtoList = new ArrayList<>();
         eventDtoList.add(new EventDto(1L, "Event 1", 50.0, new Date(), new Date(), Status.ACTIVE));
@@ -21,6 +22,7 @@ public class EventService implements IEventService {
         return eventDtoList;
     }
 
+    @Override
     public List<EventDto> getEvents(Date dateFrom, Date dateTo){
         List<EventDto> eventDtoList = new ArrayList<>();
         eventDtoList.add(new EventDto(1L, "Event 1", 50.0, new Date(), new Date(), Status.ACTIVE));
@@ -34,5 +36,20 @@ public class EventService implements IEventService {
                 .collect(Collectors.toList());
 
         return filteredEventList;
+    }
+
+    @Override
+    public EventDto getEventById(Long id) {
+        List<EventDto> eventDtoList = new ArrayList<>();
+        eventDtoList.add(new EventDto(1L, "Event 1", 50.0, new Date(), new Date(), Status.ACTIVE));
+        eventDtoList.add(new EventDto(2L, "Event 2", 30.0, new Date(), new Date(), Status.INACTIVE));
+        eventDtoList.add(new EventDto(3L, "Event 3", 75.0, new Date(), new Date(), Status.CANCELED));
+
+        EventDto eventWithId = eventDtoList.stream()
+                .filter(eventDto -> eventDto.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+
+        return eventWithId;
     }
 }
