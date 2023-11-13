@@ -1,9 +1,12 @@
 package pw.edu.pl.backend.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pw.edu.pl.backend.interfaces.IEventService;
+import pw.edu.pl.backend.mapper.EventMapper;
 import pw.edu.pl.backend.model.Status;
 import pw.edu.pl.backend.modelDto.EventDto;
+import pw.edu.pl.backend.repository.EventRepository;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,26 +16,32 @@ import java.util.stream.Collectors;
 @Service
 public class EventService implements IEventService {
 
+    @Autowired
+    EventRepository eventRepository;
+//    EventMapper eventMapper;
+//    public EventService(EventMapper eventMapper) {
+//        this.eventMapper = eventMapper;
+//    }
+
+    //    @Autowired
+
+
     public List<EventDto> getAllEvents(){
-        List<EventDto> eventDtoList = new ArrayList<>();
-        eventDtoList.add(new EventDto(1L, "Event 1", 50.0, new Date(), new Date(), Status.ACTIVE));
-        eventDtoList.add(new EventDto(2L, "Event 2", 30.0, new Date(), new Date(), Status.INACTIVE));
-        eventDtoList.add(new EventDto(3L, "Event 3", 75.0, new Date(), new Date(), Status.CANCELED));
-        return eventDtoList;
+        var events = eventRepository.findAll();
+
+        return events.stream().map(EventMapper.INSTANCE::mapToEventDto).toList();
     }
 
     public List<EventDto> getEvents(Date dateFrom, Date dateTo){
-        List<EventDto> eventDtoList = new ArrayList<>();
-        eventDtoList.add(new EventDto(1L, "Event 1", 50.0, new Date(), new Date(), Status.ACTIVE));
-        eventDtoList.add(new EventDto(2L, "Event 2", 30.0, new Date(), new Date(), Status.INACTIVE));
-        eventDtoList.add(new EventDto(3L, "Event 3", 75.0, new Date(), new Date(), Status.CANCELED));
+        List<EventDto> eventDtoList = eventRepository.findAll()
+                .stream()
+                .map(EventMapper.INSTANCE::mapToEventDto)
+                .toList();
 
-        List<EventDto> filteredEventList = eventDtoList.stream()
+        return eventDtoList.stream()
                 .filter(eventDto ->
                         eventDto.getStartTime().after(dateFrom)
                         && eventDto.getEndTime().before(dateTo))
                 .collect(Collectors.toList());
-
-        return filteredEventList;
     }
 }

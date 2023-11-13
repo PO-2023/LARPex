@@ -15,9 +15,9 @@ public class EventDto {
     private Double price;
     private Date startTime;
     private Date endTime;
-    private Status status;
+    private String status;
 
-    public EventDto(Long id, String name, Double price, Date startTime, Date endTime, Status status) {
+    public EventDto(Long id, String name, Double price, Date startTime, Date endTime, String status) {
         this.id = id;
         this.name = name;
         this.price = price;
