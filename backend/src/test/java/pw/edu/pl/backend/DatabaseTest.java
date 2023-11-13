@@ -28,6 +28,9 @@ public class DatabaseTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PaymentRepository paymentRepository;
+
 
     @Test
     void getAllEvents() {
@@ -69,5 +72,11 @@ public class DatabaseTest {
     void getAllUsers() {
         List<UserEn> users = userRepository.findAll();
         assertEquals(5, users.size());
+    }
+
+    @Test
+    void getAllPayments() {
+        List<PaymentEn> payments = paymentRepository.findAll();
+        assertEquals(3, payments.size());
     }
 }
