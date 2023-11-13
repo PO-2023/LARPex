@@ -1,15 +1,17 @@
 import { Outlet, Link } from "react-router-dom";
-import { CalendarRange, Settings, Gamepad2 } from "lucide-react";
+import { CalendarRange, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import { cn } from "@/lib/utils";
 import JoinPlayButton from "./events/JoinPlayButton";
+import { PlayClient } from "@/class/IPlay";
 const Header = () => {
   const location = useLocation();
 
   const playActive = location.pathname.includes("play");
-
+  const playClient = new PlayClient();
+  const data = playClient.checkForAvailablePlay(12);
   //TODO: Query for active event
   const joinPlay = 12127183;
   return (
@@ -25,7 +27,9 @@ const Header = () => {
               playActive && "hidden"
             )}
           >
-            <JoinPlayButton onJoinPlay={joinPlay}/>
+            {
+              data&&<JoinPlayButton onJoinPlay={joinPlay}/>
+            }
             <Link to={`/events`}>
               <Button
                 variant="ghost"

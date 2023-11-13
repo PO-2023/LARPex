@@ -1,6 +1,6 @@
-import { EventData } from "@/class/EventData";
+import { EventDTO } from "@/class/EventData";
 
-export const events: EventData[] = [
+export const events: EventDTO[] = [
   {
     id: 12,
     startTime: new Date(),

@@ -2,7 +2,7 @@ import { PlayerClient } from "@/class/IPlayer";
 
 const PlayerPanelWindow: React.FC = () => {
   const playerClient = new PlayerClient();
-  const data = playerClient.getPlayer(1);
+  const data = playerClient.getPlayerData(1);
   return (
     <div className="sm:px-14 px-3 mt-10">
       <h1 className="font-bold text-2xl">{data?.name}</h1>
