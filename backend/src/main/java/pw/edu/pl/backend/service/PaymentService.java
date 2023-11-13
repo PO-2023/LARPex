@@ -20,21 +20,23 @@ public class PaymentService implements IPaymentService {
 
         PaymentEn paymentEn = new PaymentEn();
         paymentEn.setAmmount(0.0);
-        paymentEn.setMethod(paymentRequestDto.getPaymentMethod());
+        paymentEn.setMethod(paymentRequestDto.getPaymentMethod().toUpperCase());
         paymentEn.setStatus("pending");
         paymentEn = paymentRepository.save(paymentEn);
 
         return new PaymentStatusDto(paymentEn.getId(),paymentEn.getStatus());
     }
 
-    public void processPayment(Integer paymentId) {
+    public void processPayment(Integer paymentId) throws Exception {
         PaymentEn paymentEn = paymentRepository.findById(paymentId).orElseThrow(() -> new RuntimeException("Payment not found"));
         // tutaj ma sie odbywac cala logika oplacenia wydarzenia
 
         String[] possibleStatuses = {"failure", "success"};
-        String randomStatus = possibleStatuses[new Random().nextInt(possibleStatuses.length)];
-
-        paymentEn.setStatus(randomStatus);
+        //String randomStatus = possibleStatuses[new Random().nextInt(possibleStatuses.length)];
+        if(paymentEn.getMethod().equals("BLIK"))
+            paymentEn.setStatus(possibleStatuses[0]);
+        else
+            paymentEn.setStatus(possibleStatuses[1]);
 
         paymentRepository.save(paymentEn);
     }
