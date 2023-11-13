@@ -31,6 +31,18 @@ public class EventServiceTest {
         assertEquals("name",eventDto.getName());
     }
 
+    @Test
+    public void getEventById(){
+        var eventDto = eventService.getEventById(1L);
+        assertEquals("Game Night 1", eventDto.getName());
+    }
+
+    @Test
+    public void enrollEventTest(){
+        var enrollEventDto = eventService.enrollToEvent(1L, 1L);
+        assertEquals(1L, enrollEventDto.getPaymentId());
+    }
+
 //    @Test
 //    public void getEventsExistingInTimeFrame(){
 //        // Create a new Date object representing the current date and time

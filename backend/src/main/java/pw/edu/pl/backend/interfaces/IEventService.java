@@ -1,12 +1,17 @@
 package pw.edu.pl.backend.interfaces;
 
+import pw.edu.pl.backend.modelDto.EnrollEventDto;
 import pw.edu.pl.backend.modelDto.EventDto;
 
 import java.util.Date;
 import java.util.List;
 
 public interface IEventService {
-    public List<EventDto> getAllEvents();
+    List<EventDto> getAllEvents();
 
-    public List<EventDto> getEvents(Date dateFrom, Date dateTo);
+    List<EventDto> getEvents(Date dateFrom, Date dateTo);
+
+    EventDto getEventById(Long eventId);
+
+    EnrollEventDto enrollToEvent(Long id, Long userId);
 }

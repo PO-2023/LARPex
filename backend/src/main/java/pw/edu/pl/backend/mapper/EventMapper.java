@@ -9,4 +9,5 @@ import pw.edu.pl.backend.modelDto.EventDto;
 public interface EventMapper {
     EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
     EventDto mapToEventDto(EventEn event);
+    EventEn mapToEvent(EventDto eventDto);
 }
