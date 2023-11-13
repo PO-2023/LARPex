@@ -1,36 +1,85 @@
 package pw.edu.pl.backend.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pw.edu.pl.backend.interfaces.IPlayer;
+
+import pw.edu.pl.backend.entity.UserEn;
+import pw.edu.pl.backend.interfaces.IPlayerService;
+import pw.edu.pl.backend.mapper.CharacterMapper;
+import pw.edu.pl.backend.mapper.PlayerMapper;
+import pw.edu.pl.backend.mapper.UserMapper;
+import pw.edu.pl.backend.model.Player;
+import pw.edu.pl.backend.model.Character;
 import pw.edu.pl.backend.modelDto.CharacterDto;
 import pw.edu.pl.backend.modelDto.PlayerDto;
+import pw.edu.pl.backend.repository.CharacterRepository;
+import pw.edu.pl.backend.repository.PlayerRepository;
+import pw.edu.pl.backend.repository.UserRepository;
 
 @Service
-public class PlayerService implements IPlayer {
+public class PlayerService implements IPlayerService {
 
-    private List<PlayerDto> mockedPlayers = new ArrayList<>();
+    @Autowired
+    PlayerRepository playerRepository;
 
-    public PlayerService() {
-        mockedPlayers.add(new PlayerDto(1L, "Jan", "Kowalski", "jakow7711", new CharacterDto(), 0));
-        mockedPlayers.add(new PlayerDto(2L, "Karol", "KArolowy", "tttyyy111", new CharacterDto(), 4));
-        mockedPlayers.add(new PlayerDto(3L, "Adam", "Adamski", "ooonnn3322", new CharacterDto(), 2));
-        
-    }
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    CharacterRepository characterRepository;
 
     @Override
     public PlayerDto getPlayer(Long id) {
-        if(mockedPlayers == null) {
+        PlayerDto outputPlayerDto;
+        Player player = playerRepository.findAll()
+                .stream()
+                .filter(p -> p.getId() == id)
+                .map(PlayerMapper.INSTANCE::mapToPlayer)
+                .toList()
+                .get(0);
+
+        if(player == null) {
             return null;
+        } else {
+            outputPlayerDto = new PlayerDto(player.getId(), player.getName(), player.getSurname(), player.getNickname(), null, player.getRank());
         }
-        for(PlayerDto p : mockedPlayers) {
-            if(p.getId() == id) {
-                return p;
+
+        UserEn userBindedToPlayer = getUserBindedToPlayer(player);
+        CharacterDto characterDtoBindedToPlayer = getCharacterDtoBindedToPlayer(player);
+        
+        try {
+            outputPlayerDto.setName(userBindedToPlayer.getName());
+            outputPlayerDto.setSurname(userBindedToPlayer.getSurname());
+            outputPlayerDto.setNickname(userBindedToPlayer.getNickname());
+            if(characterDtoBindedToPlayer != null) {
+                outputPlayerDto.setCharacter(characterDtoBindedToPlayer);
             }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-        return null;
+        return outputPlayerDto;
     }
 
+    private UserEn getUserBindedToPlayer(Player player) {
+        return userRepository.findAll()
+                .stream()
+                .map(UserMapper.INSTANCE::mapToUserEn)
+                .filter(userEn -> userEn.getId() == player.getUserId())
+                .toList()
+                .get(0);
+    }
+
+    CharacterDto getCharacterDtoBindedToPlayer(Player player) {
+        CharacterDto characterDtoBindedToPlayer = null;
+        Character characterBindedToPlayer = characterRepository.findAll()
+                .stream()
+                .map(CharacterMapper.INSTANCE::mapToCharacter)
+                .filter(character -> character.getId() == player.getCharacterId())
+                .toList()
+                .get(0);
+        if(characterBindedToPlayer != null) {
+            characterDtoBindedToPlayer = new CharacterDto(characterBindedToPlayer.getId(), characterBindedToPlayer.getName(), characterBindedToPlayer.getDescription());
+        }
+        return characterDtoBindedToPlayer;
+    }
 }
