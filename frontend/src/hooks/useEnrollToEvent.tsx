@@ -14,7 +14,11 @@ export const useEnrollToEvent = ({
 
   const { mutate: enrollToEvent } = useMutation({
     mutationFn: () => cEvents.enrollToEvents(playerId, eventId),
-    onSuccess: () => dialogDispatcher("MakePaymentDialog"),
+    onSuccess: () => {
+      dialogDispatcher("MakePaymentDialog", {
+        paymentData: { paymentId: 123, price: 23 },
+      });
+    },
   });
 
   return { enrollToEvent };

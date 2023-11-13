@@ -28,11 +28,12 @@ const formSchema = z.object({
 });
 
 const MakePaymentDialog = () => {
-  const { type, closeDialog } = useDialog();
+  const { type, closeDialog, dialogDispatcher, data } = useDialog();
   const { selectedEvent } = useSelectedEvent();
-  const { dialogDispatcher } = useDialog();
-  const [isLoading, setIsLoading] = useState(false);
 
+  const paymentData = data?.paymentData;
+
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,7 +67,7 @@ const MakePaymentDialog = () => {
                 <div className="mb-3">
                   Kwota do zapłaty:
                   <div className="text-indigo-500 font-bold text-xl">
-                    {selectedEvent.price}.00 zł
+                    {paymentData?.price}.00 zł
                   </div>
                 </div>
                 <FormField
