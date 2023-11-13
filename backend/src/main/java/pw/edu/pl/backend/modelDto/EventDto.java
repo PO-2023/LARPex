@@ -15,9 +15,11 @@ public class EventDto {
     private Double price;
     private Date startTime;
     private Date endTime;
-    private String status;
+    private Status status;
+    private Long gameId;
+    private int players;
 
-    public EventDto(Long id, String name, Double price, Date startTime, Date endTime, String status) {
+    public EventDto(Long id, String name, Double price, Date startTime, Date endTime, Status status) {
         this.id = id;
         this.name = name;
         this.price = price;
