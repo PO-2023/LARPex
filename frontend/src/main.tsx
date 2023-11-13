@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Events from "./views/Events.tsx";
 import Header from "./components/Header.tsx";
 import DialogProvider from "./providers/DialogProvider.tsx";
-import Play from "./views/Play.tsx";
+import PlayerPanelWindow from "./views/PlayerPanelWindow.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "/play",
         
         children: [
-          {path: ":id", element: <Play />}
+          {path: ":id", element: <PlayerPanelWindow />}
         ]
       },
     ],

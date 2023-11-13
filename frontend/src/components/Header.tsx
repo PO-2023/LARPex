@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { useLocation } from "react-router-dom";
 import Logo from "./Logo";
 import { cn } from "@/lib/utils";
+import JoinPlayButton from "./events/JoinPlayButton";
 const Header = () => {
   const location = useLocation();
 
@@ -24,16 +25,7 @@ const Header = () => {
               playActive && "hidden"
             )}
           >
-            <Link to={`/play/${joinPlay}`}>
-              <Button
-                className={cn(
-                  "cursor-pointer flex bg-indigo-500 hover:bg-indigo-400 gap-1 "
-                )}
-              >
-                <Gamepad2 />
-                <h1 className="hidden sm:block">Dołącz do gry</h1>
-              </Button>
-            </Link>
+            <JoinPlayButton onJoinPlay={joinPlay}/>
             <Link to={`/events`}>
               <Button
                 variant="ghost"
