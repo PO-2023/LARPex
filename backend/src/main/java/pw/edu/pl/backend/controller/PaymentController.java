@@ -1,13 +1,9 @@
 package pw.edu.pl.backend.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pw.edu.pl.backend.modelDto.EventDto;
-import pw.edu.pl.backend.modelDto.PaymentRequestDto;
-import pw.edu.pl.backend.service.EventService;
 import pw.edu.pl.backend.service.PaymentService;
-
-import java.util.List;
 
 @RestController
 public class PaymentController {
@@ -18,12 +14,12 @@ public class PaymentController {
     }
 
     @GetMapping("/processPayment")
-    public void processPayment(Integer paymentId){
-        paymentService.processPayment(paymentId);
-    }
-
-    @GetMapping("/createPaymentRequest")
-    public void processPayment(PaymentRequestDto paymentRequestDto){
-        paymentService.createPaymentRequest(paymentRequestDto);
+    public ResponseEntity<Object> processPayment(Integer paymentId){
+        try {
+            paymentService.processPayment(paymentId);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
     }
 }
