@@ -22,11 +22,7 @@ public class PlayerEn {
     private Integer playId;
     @Basic
     @Column(name = "rank")
-<<<<<<< HEAD
-    private int rank;
-=======
     private Integer rank;
->>>>>>> main
 
     public int getId() {
         return id;
