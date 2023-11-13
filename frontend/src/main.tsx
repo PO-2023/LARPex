@@ -7,6 +7,7 @@ import Events from "./views/Events.tsx";
 import Header from "./components/Header.tsx";
 import DialogProvider from "./providers/DialogProvider.tsx";
 import PlayerPanelWindow from "./views/PlayerPanelWindow.tsx";
+import { QueryProvider } from "./providers/QueryProvider.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,10 +25,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/play",
-        
-        children: [
-          {path: ":id", element: <PlayerPanelWindow />}
-        ]
+
+        children: [{ path: ":id", element: <PlayerPanelWindow /> }],
       },
     ],
   },
@@ -35,6 +34,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryProvider>
+      <RouterProvider router={router} />
+    </QueryProvider>
   </React.StrictMode>
 );

@@ -1,6 +1,15 @@
-import { EventDTO } from "./EventData";
+import { DateRange } from "react-day-picker";
+import { events } from "@/mock/eventList";
 
-export interface CEvents {
-  onDiplayEventList: () => EventDTO[];
-  enrollToEvent: (playerId: number, eventId: number) => boolean;
+export class CEvents {
+  async enrollToEvents(playerId: number, eventId: number) {
+    console.log(playerId, eventId);
+  }
+
+  async getEvents(dateRange: DateRange | undefined) {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(dateRange);
+
+    return events;
+  }
 }
