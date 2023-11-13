@@ -1,7 +1,6 @@
 import { CEvents } from "@/class/CEvents";
 import { useDialog } from "@/stores/dialogStore/dialogStore";
 import { useMutation } from "@tanstack/react-query";
-
 export const useEnrollToEvent = ({
   playerId,
   eventId,
@@ -14,9 +13,9 @@ export const useEnrollToEvent = ({
 
   const { mutate: enrollToEvent } = useMutation({
     mutationFn: () => cEvents.enrollToEvents(playerId, eventId),
-    onSuccess: () => {
+    onSuccess: (result) => {
       dialogDispatcher("MakePaymentDialog", {
-        paymentData: { paymentId: 123, price: 23 },
+        paymentData: result,
       });
     },
   });
