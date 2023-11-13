@@ -4,9 +4,11 @@ import { create } from "zustand";
 type DialogType =
   | "DescriptionDialog"
   | "MakePaymentDialog"
-  | "SuccessDialog"
+  | "SuccessDialog" | "ErrorDialog"
   | undefined;
-type DialogData = { event: EventDTO } | undefined;
+type DialogData =
+  | { event?: EventDTO; paymentData?: { paymentId: number; price: number } }
+  | undefined;
 
 type Store = {
   type: DialogType;

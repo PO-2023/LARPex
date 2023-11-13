@@ -10,7 +10,7 @@ import {
 import Event from "./Event";
 
 interface EventListProps {
-  events: EventDTO[];
+  events: EventDTO[] | undefined;
 }
 
 const EventList: FC<EventListProps> = ({ events }) => {
@@ -26,9 +26,8 @@ const EventList: FC<EventListProps> = ({ events }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {events.map((event) => (
-          <Event key={event.id} event={event} />
-        ))}
+        {events &&
+          events.map((event) => <Event key={event.id} event={event} />)}
       </TableBody>
     </Table>
   );
