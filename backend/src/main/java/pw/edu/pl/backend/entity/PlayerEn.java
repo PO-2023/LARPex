@@ -22,7 +22,7 @@ public class PlayerEn {
     private Integer playId;
     @Basic
     @Column(name = "rank")
-    private String rank;
+    private int rank;
 
     public int getId() {
         return id;
@@ -56,11 +56,11 @@ public class PlayerEn {
         this.playId = playId;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 
