@@ -14,7 +14,8 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("/processPayment")
+
+    @GetMapping("/processPayment/{paymentId}/{method}")
     public ResponseEntity<Object> processPayment(@PathVariable String method, @PathVariable Integer paymentId){
         try {
             paymentService.processPayment(paymentId,method);

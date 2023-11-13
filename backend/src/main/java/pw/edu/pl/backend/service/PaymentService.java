@@ -35,11 +35,13 @@ public class PaymentService implements IPaymentService {
 
         String[] possibleStatuses = {"failure", "success"};
         //String randomStatus = possibleStatuses[new Random().nextInt(possibleStatuses.length)];
-        if(paymentEn.getMethod().equals("BLIK"))
+        if(paymentEn.getMethod().equals("BLIK")) {
             paymentEn.setStatus(possibleStatuses[0]);
-        else
+            paymentRepository.save(paymentEn);
+            throw new Exception("BLIK");
+        } else {
             paymentEn.setStatus(possibleStatuses[1]);
-
-        paymentRepository.save(paymentEn);
+            paymentRepository.save(paymentEn);
+        }
     }
 }

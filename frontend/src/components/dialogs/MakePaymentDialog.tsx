@@ -22,12 +22,15 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PaymentTypeDropdown from "../events/PaymentTypeDropdown";
+import {CPayment} from "@/class/CPayment.ts";
 
 const formSchema = z.object({
   methodType: z.string().min(1, "Musisz wybrać metodę płatności!"),
 });
 
 const MakePaymentDialog = () => {
+
+  const cPayment = new CPayment();
   const { type, closeDialog, dialogDispatcher, data } = useDialog();
   const { selectedEvent } = useSelectedEvent();
 
@@ -43,9 +46,13 @@ const MakePaymentDialog = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
-    dialogDispatcher("SuccessDialog");
+    cPayment.makePayment(paymentData?.paymentId, values.methodType).then((response) => {
+      if (response) {
+        dialogDispatcher("SuccessDialog");
+      } else {
+        dialogDispatcher("ErrorDialog");
+      }
+    });
   }
 
   if (!selectedEvent) return;
