@@ -2,6 +2,7 @@ package pw.edu.pl.backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pw.edu.pl.backend.service.PaymentService;
 
@@ -14,9 +15,9 @@ public class PaymentController {
     }
 
     @GetMapping("/processPayment")
-    public ResponseEntity<Object> processPayment(Integer paymentId){
+    public ResponseEntity<Object> processPayment(@PathVariable String method, @PathVariable Integer paymentId){
         try {
-            paymentService.processPayment(paymentId);
+            paymentService.processPayment(paymentId,method);
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
