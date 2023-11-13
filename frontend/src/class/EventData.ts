@@ -1,15 +1,15 @@
-export type EventData = {
+export type EventDTO = {
   id: number;
   startTime: Date;
   endTime: Date;
   players: number;
   price: number;
   eventName: string;
-  game: GameData;
+  game: GameDTO;
   status: string;
 };
 
-export type GameData = {
+export type GameDTO = {
   id: number;
   author: string;
   playerLimit: number;

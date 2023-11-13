@@ -1,8 +1,12 @@
-import { EventData } from "@/class/EventData";
+import { EventDTO } from "@/class/EventData";
 import { create } from "zustand";
 
-type DialogType = "DescriptionDialog" | "MakePaymentDialog" | "SuccessDialog" | undefined;
-type DialogData = { event: EventData } | undefined;
+type DialogType =
+  | "DescriptionDialog"
+  | "MakePaymentDialog"
+  | "SuccessDialog"
+  | undefined;
+type DialogData = { event: EventDTO } | undefined;
 
 type Store = {
   type: DialogType;

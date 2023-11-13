@@ -1,4 +1,4 @@
-import { EventData } from "@/class/EventData";
+import { EventDTO } from "@/class/EventData";
 import { FC } from "react";
 import {
   Table,
@@ -10,7 +10,7 @@ import {
 import Event from "./Event";
 
 interface EventListProps {
-  events: EventData[];
+  events: EventDTO[];
 }
 
 const EventList: FC<EventListProps> = ({ events }) => {

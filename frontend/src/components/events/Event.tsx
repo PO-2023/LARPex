@@ -1,4 +1,4 @@
-import { EventData } from "@/class/EventData";
+import { EventDTO } from "@/class/EventData";
 import { FC } from "react";
 import { TableCell, TableRow } from "../ui/table";
 import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { formatTime } from "@/lib/utils";
 
 interface EventProps {
-  event: EventData;
+  event: EventDTO;
 }
 
 const Event: FC<EventProps> = ({ event }) => {
