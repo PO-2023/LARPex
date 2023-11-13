@@ -1,10 +1,13 @@
 package pw.edu.pl.backend.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import pw.edu.pl.backend.modelDto.EventDto;
+import pw.edu.pl.backend.entity.EventEn;
+import pw.edu.pl.backend.repository.EventRepository;
 import pw.edu.pl.backend.service.EventService;
 
 import java.util.Date;

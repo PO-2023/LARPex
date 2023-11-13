@@ -2,8 +2,8 @@ package pw.edu.pl.backend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pw.edu.pl.backend.entity.EventEn;
+import pw.edu.pl.backend.entity.PlayEn;
 
 @Repository
-public interface EventRepository extends JpaRepository<EventEn, Integer> {
+public interface PlayRepository extends JpaRepository<PlayEn, Integer> {
 }
