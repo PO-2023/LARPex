@@ -1,5 +1,5 @@
-import { events } from "@/mock/eventList";
-import { EventDTO } from "./EventData";
+import {events} from "@/mock/eventList";
+import {EventDTO} from "./dto/EventDTO";
 
 export interface IJoinPlay {
   checkForAvailablePlay(id: number): EventDTO | undefined;

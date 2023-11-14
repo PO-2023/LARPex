@@ -1,22 +1,16 @@
-import { EventDTO } from "@/class/EventData";
-import { FC } from "react";
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import {EventDTO} from "@/class/dto/EventDTO";
+import {FC} from "react";
+import {Table, TableBody, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import Event from "./Event";
 
 interface EventListProps {
-  events: EventDTO[] | undefined;
+    events: EventDTO[] | undefined;
 }
 
-const EventList: FC<EventListProps> = ({ events }) => {
-  return (
-    <Table className="mt-5 sm:mt-5 text-xs sm:text-sm">
-      <TableHeader>
+const EventList: FC<EventListProps> = ({events}) => {
+    return (
+        <Table className="mt-5 sm:mt-5 text-xs sm:text-sm">
+            <TableHeader>
         <TableRow>
           <TableHead className="pl-2">Nazwa wydarzenia</TableHead>
           <TableHead>Nazwa Gry</TableHead>

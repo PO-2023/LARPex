@@ -1,4 +1,4 @@
-import { EventDTO } from "@/class/EventData";
+import {EventDTO} from "@/class/dto/EventDTO";
 
 export const events: EventDTO[] = [
   {

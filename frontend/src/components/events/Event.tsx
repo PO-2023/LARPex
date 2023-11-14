@@ -1,16 +1,15 @@
-import { EventDTO } from "@/class/EventData";
-import { FC } from "react";
-import { TableCell, TableRow } from "../ui/table";
-import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
-import { cn } from "@/lib/utils";
-import { formatTime } from "@/lib/utils";
+import {EventDTO} from "@/class/dto/EventDTO";
+import {FC} from "react";
+import {TableCell, TableRow} from "../ui/table";
+import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
+import {cn, formatTime} from "@/lib/utils";
 
 interface EventProps {
   event: EventDTO;
 }
 
-const Event: FC<EventProps> = ({ event }) => {
-  const { selectedEvent, setSelectedEvent } = useSelectedEvent();
+const Event: FC<EventProps> = ({event}) => {
+  const {selectedEvent, setSelectedEvent} = useSelectedEvent();
   const formattedDateTime = event.startTime.toLocaleDateString();
 
   const startTime =

@@ -1,5 +1,5 @@
-import { EventDTO } from "@/class/EventData";
-import { create } from "zustand";
+import {EventDTO} from "@/class/dto/EventDTO";
+import {create} from "zustand";
 
 type Store = {
   selectedEvent: EventDTO | null;
@@ -8,5 +8,5 @@ type Store = {
 
 export const useSelectedEvent = create<Store>()((set) => ({
   selectedEvent: null,
-  setSelectedEvent: (event) => set(() => ({ selectedEvent: event })),
+  setSelectedEvent: (event) => set(() => ({selectedEvent: event})),
 }));
