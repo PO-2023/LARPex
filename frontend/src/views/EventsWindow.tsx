@@ -12,16 +12,11 @@ import {EventsPresenter} from "@/class/presenter/EventsPresenter";
 import {useDialog} from "@/stores/dialogStore/dialogStore";
 import {Loader2} from "lucide-react";
 
-const Events = () => {
-    return EventsWindow()
-};
-
 const EventsWindow = () => {
     const {dialogDispatcher} = useDialog();
 
     const [events, setEvents] = useState([])
     const [isLoading, setIsLoading] = useState(false)
-    console.log(events)
 
     const presenter = new EventsPresenter(dialogDispatcher, setEvents, setIsLoading)
     const enrollToEvent: IEnrollToEvent = new EnrollToEvent(presenter)
@@ -63,4 +58,4 @@ const EventsWindow = () => {
     );
 }
 
-export default Events;
+export default EventsWindow;
