@@ -1,5 +1,5 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
-import {useDialog} from "@/stores/dialogStore/dialogStore";
+import {DialogType, useDialog} from "@/stores/dialogStore/dialogStore";
 import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
 import {Button} from "../ui/button";
 import {Form, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
@@ -36,9 +36,9 @@ const MakePaymentDialog = () => {
     setIsLoading(true);
     cPayment.makePayment(paymentData?.paymentId, values.methodType).then((response) => {
       if (response) {
-        dialogDispatcher("SuccessDialog");
+        dialogDispatcher(DialogType.SUCCESS_DIALOG);
       } else {
-        dialogDispatcher("ErrorDialog");
+        dialogDispatcher(DialogType.ERROR_DIALOG);
       }
     });
   }
