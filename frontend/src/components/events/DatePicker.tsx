@@ -3,6 +3,7 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { pl } from "date-fns/locale";
 
 import {
   Popover,
@@ -31,14 +32,14 @@ const DatePicker = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
               {dateRange?.from ? (
                 dateRange.to ? (
                   <>
-                    {format(dateRange.from, "LLL dd, y")} -{" "}
-                    {format(dateRange.to, "LLL dd, y")}
+                    {format(dateRange.from, "LLL dd, y", { locale: pl })} -{" "}
+                    {format(dateRange.to, "LLL dd, y", { locale: pl })}
                   </>
                 ) : (
-                  format(dateRange.from, "LLL dd, y")
+                  format(dateRange.from, "LLL dd, y", { locale: pl })
                 )
               ) : (
-                <span className="hidden sm:block">Pick a date</span>
+                <span className="hidden sm:block">Wybierz zakres</span>
               )}
             </div>
           </Button>
@@ -46,6 +47,7 @@ const DatePicker = ({ className }: React.HTMLAttributes<HTMLDivElement>) => {
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
             initialFocus
+            locale={pl}
             mode="range"
             defaultMonth={dateRange?.from}
             selected={dateRange}
