@@ -1,26 +1,14 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { useDialog } from "@/stores/dialogStore/dialogStore";
-import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
-import { Button } from "../ui/button";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  FormDescription,
-} from "@/components/ui/form";
+import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
+import {useDialog} from "@/stores/dialogStore/dialogStore";
+import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
+import {Button} from "../ui/button";
+import {Form, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
 
-import { useState } from "react";
-import { BadgeDollarSign, Loader2 } from "lucide-react";
+import {useState} from "react";
+import {BadgeDollarSign, Loader2} from "lucide-react";
 import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import PaymentTypeDropdown from "../events/PaymentTypeDropdown";
 import {CPayment} from "@/class/CPayment.ts";
 
@@ -31,8 +19,8 @@ const formSchema = z.object({
 const MakePaymentDialog = () => {
 
   const cPayment = new CPayment();
-  const { type, closeDialog, dialogDispatcher, data } = useDialog();
-  const { selectedEvent } = useSelectedEvent();
+  const {closeDialog, dialogDispatcher, data} = useDialog();
+  const {selectedEvent} = useSelectedEvent();
 
   const paymentData = data?.paymentData;
 
@@ -58,17 +46,17 @@ const MakePaymentDialog = () => {
   if (!selectedEvent) return;
 
   return (
-    <Dialog open={type === "MakePaymentDialog"} onOpenChange={closeDialog}>
-      <DialogContent className="min-h-[17rem] max-w-[25rem] ">
-        <DialogHeader>
-          <DialogTitle>
+      <Dialog open={true} onOpenChange={closeDialog}>
+        <DialogContent className="min-h-[17rem] max-w-[25rem] ">
+          <DialogHeader>
+            <DialogTitle>
             <span className="font-bold text-indigo-500 text-xl">
               Płatność 🛒
             </span>
-          </DialogTitle>
-        </DialogHeader>
-        <section className="flex flex-col justify-between mt-2">
-          <Form {...form}>
+            </DialogTitle>
+          </DialogHeader>
+          <section className="flex flex-col justify-between mt-2">
+            <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <section className="flex flex-col text-sm">
                 <div className="mb-3">

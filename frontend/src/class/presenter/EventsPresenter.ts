@@ -8,12 +8,12 @@ export class EventsPresenter {
     }
 
     dispatchPayment(result: EnrollEventDTO) {
-        this.dialogDispatcher("MakePaymentDialog", {
+        this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
             paymentData: result,
         });
     }
 
     dispatchDescription() {
-        this.dialogDispatcher("DescriptionDialog");
+        this.dialogDispatcher(DialogType.DESCRIPTION_DIALOG);
     }
 }

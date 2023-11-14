@@ -1,32 +1,27 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { useDialog } from "@/stores/dialogStore/dialogStore";
-import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
-import { Button } from "../ui/button";
+import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
+import {useDialog} from "@/stores/dialogStore/dialogStore";
+import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
+import {Button} from "../ui/button";
 
 const ErrorDialog
     = () => {
-  const { type, closeDialog } = useDialog();
-  const { selectedEvent } = useSelectedEvent();
+  const {closeDialog} = useDialog();
+  const {selectedEvent} = useSelectedEvent();
 
   if (!selectedEvent) return;
 
   return (
-    <Dialog open={type === "ErrorDialog"} onOpenChange={closeDialog}>
-      <DialogContent className="min-h-[20rem] max-w-[19rem] flex flex-col">
-        <DialogHeader>
-          <DialogTitle>
+      <Dialog open={true} onOpenChange={closeDialog}>
+        <DialogContent className="min-h-[20rem] max-w-[19rem] flex flex-col">
+          <DialogHeader>
+            <DialogTitle>
             <span className="font-bold text-indigo-500 text-xl">
               Płatność zakończona niepowodzeniem
             </span>
-          </DialogTitle>
-          <section className="flex flex-col gap-1 text-sm">
-            <div
-              className="flex justify-center"
+            </DialogTitle>
+            <section className="flex flex-col gap-1 text-sm">
+              <div
+                  className="flex justify-center"
               style={{
                 position: "absolute",
                 bottom: "20px",

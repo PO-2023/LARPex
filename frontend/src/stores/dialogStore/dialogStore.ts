@@ -1,11 +1,13 @@
 import {EventDTO} from "@/class/dto/EventDTO";
 import {create} from "zustand";
 
-export type DialogType =
-    | "DescriptionDialog"
-    | "MakePaymentDialog"
-    | "SuccessDialog" | "ErrorDialog"
-    | undefined;
+export enum DialogType {
+  DESCRIPTION_DIALOG,
+  MAKE_PAYMENT_DIALOG,
+  SUCCESS_DIALOG,
+  ERROR_DIALOG,
+}
+
 export type DialogData =
     | { event?: EventDTO; paymentData?: { paymentId: number; price: number } }
     | undefined;
