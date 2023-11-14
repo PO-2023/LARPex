@@ -1,5 +1,4 @@
 import {IMakePayment} from "@/gateway/IMakePayment.ts";
-import {PaymentStatus} from "@/class/PaymentStatus.ts";
 
 export class MakePayment implements IMakePayment {
     makePayment(paymentId: number, method: string): Promise<boolean> {
@@ -8,5 +7,4 @@ export class MakePayment implements IMakePayment {
                 return resp.status == 200
             });
     }
-
 }

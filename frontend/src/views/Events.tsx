@@ -12,9 +12,6 @@ import {EventsPresenter} from "@/class/presenter/EventsPresenter";
 import {useDialog} from "@/stores/dialogStore/dialogStore";
 import {Loader2} from "lucide-react";
 
-const displayEventList: IDisplayEventList = new DisplayEventList()
-
-
 const Events = () => {
     return EventsWindow()
 };
@@ -22,23 +19,24 @@ const Events = () => {
 const EventsWindow = () => {
     const {dialogDispatcher} = useDialog();
 
-    const presenter = new EventsPresenter(dialogDispatcher)
+    const [events, setEvents] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    console.log(events)
+
+    const presenter = new EventsPresenter(dialogDispatcher, setEvents, setIsLoading)
     const enrollToEvent: IEnrollToEvent = new EnrollToEvent(presenter)
+    const displayEventList: IDisplayEventList = new DisplayEventList(presenter)
     const controller = new EventsController(displayEventList, enrollToEvent)
 
     const {setSelectedEvent, selectedEvent} = useSelectedEvent();
     const {dateRange} = useDateRange();
-    const [events, setEvents] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (events?.length) setSelectedEvent(events[0]);
     }, [setSelectedEvent, events]);
 
     useEffect(() => {
-        setIsLoading(true)
-        setEvents(controller.getEvents(dateRange));
-        setIsLoading(false)
+        controller.getEvents(dateRange)
     }, [dateRange])
 
     return (
