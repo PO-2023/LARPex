@@ -22,7 +22,7 @@ const EventsWindow = () => {
     const {dialogDispatcher} = useDialog();
 
     const presenter = new EventsPresenter(dialogDispatcher)
-    const enrollToEvent: IEnrollToEvent = new EnrollToEvent(dialogDispatcher)
+    const enrollToEvent: IEnrollToEvent = new EnrollToEvent(presenter)
     const controller = new EventsController(displayEventList, enrollToEvent)
 
     const {setSelectedEvent, selectedEvent} = useSelectedEvent();
