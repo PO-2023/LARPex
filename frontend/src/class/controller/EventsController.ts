@@ -12,6 +12,6 @@ export class EventsController {
     }
 
     getEvents(dateRange: DateRange | undefined) {
-        return this.displayEventList.getEvents()
+        return this.displayEventList.getEvents(dateRange)
     }
 }
