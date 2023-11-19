@@ -6,4 +6,5 @@ import pw.edu.pl.backend.entity.EventEn;
 
 @Repository
 public interface EventRepository extends JpaRepository<EventEn, Integer> {
+
 }

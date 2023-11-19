@@ -1,8 +1,11 @@
 package pw.edu.pl.backend.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -20,10 +23,10 @@ public class EventEn {
     private Double price;
     @Basic
     @Column(name = "start_time")
-    private Date startTime;
+    private LocalDateTime startTime;
     @Basic
     @Column(name = "end_time")
-    private Date endTime;
+    private LocalDateTime endTime;
     @Basic
     @Column(name = "status")
     private String status;
@@ -55,19 +58,19 @@ public class EventEn {
         this.price = price;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 

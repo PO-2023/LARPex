@@ -8,8 +8,6 @@ import pw.edu.pl.backend.modelDto.PaymentRequestDto;
 import pw.edu.pl.backend.modelDto.PaymentStatusDto;
 import pw.edu.pl.backend.repository.PaymentRepository;
 
-import java.util.Random;
-
 @Service
 public class PaymentService implements IPaymentService {
 
@@ -17,10 +15,8 @@ public class PaymentService implements IPaymentService {
     PaymentRepository paymentRepository;
 
     public PaymentStatusDto createPaymentRequest(PaymentRequestDto paymentRequestDto) {
-
         PaymentEn paymentEn = new PaymentEn();
         paymentEn.setAmmount(0.0);
-//        paymentEn.setMethod(paymentRequestDto.getPaymentMethod().toUpperCase());
         paymentEn.setStatus("pending");
         paymentEn = paymentRepository.save(paymentEn);
 
@@ -28,13 +24,13 @@ public class PaymentService implements IPaymentService {
     }
 
     public void processPayment(Integer paymentId,String method) throws Exception {
-//        PaymentEn paymentEn = paymentRepository.findById(paymentId).orElseThrow(() -> new RuntimeException("Payment not found"));
+        PaymentEn paymentEn = paymentRepository.findById(paymentId).orElseThrow(() -> new RuntimeException("Payment not found"));
         // tutaj ma sie odbywac cala logika oplacenia wydarzenia
-        PaymentEn paymentEn = new PaymentEn();
+//        PaymentEn paymentEn = new PaymentEn();
         paymentEn.setMethod(method.toUpperCase());
 
         String[] possibleStatuses = {"failure", "success"};
-        //String randomStatus = possibleStatuses[new Random().nextInt(possibleStatuses.length)];
+
         if(paymentEn.getMethod().equals("BLIK")) {
             paymentEn.setStatus(possibleStatuses[0]);
             paymentRepository.save(paymentEn);

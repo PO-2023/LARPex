@@ -8,8 +8,6 @@ import pw.edu.pl.backend.mapper.EventMapper;
 import pw.edu.pl.backend.modelDto.EventDto;
 import pw.edu.pl.backend.service.EventService;
 
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -22,7 +20,11 @@ public class EventServiceTest {
         var eventDtoList = eventService.getAllEvents();
         assertEquals(5, eventDtoList.size());
     }
-
+    @Test
+    public void getAllEventsByDate_ShouldReturnEmptyList(){
+        var eventDtoList = eventService.getEvents("2011-12-11","2012-12-11");
+        assertEquals(0, eventDtoList.size());
+    }
     @Test
     public void mapperTest(){
         EventEn e = new EventEn();
