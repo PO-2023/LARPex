@@ -22,9 +22,10 @@ export class DisplayEventList implements IDisplayEventList {
                     dateQuery += `&dateTo=${this.formatDateToYYYYMMDD(dateRange.from)}`
                 }
             }
-            const {data} = await axios.get(`http://localhost:8080/event${dateQuery}`);
-            this.presenter.setEvents(data);
+            const {data: events} = await axios.get(`http://localhost:8080/event${dateQuery}`);
+            this.presenter.setEvents(events);
         } catch (e) {
+            this.presenter.setEvents([])
         }
     }
 
