@@ -30,7 +30,7 @@ public class PaymentService implements IPaymentService {
         return new PaymentStatusDto((long) paymentEn.getId(),paymentEn.getStatus());
     }
 
-    public void processPayment(Integer paymentId,String method) throws Exception {
+    public void processPayment(Long paymentId,String method) throws Exception {
         PaymentEn paymentEn = paymentRepository.findById(paymentId).orElseThrow(() -> new RuntimeException("Payment not found"));
         // tutaj ma sie odbywac cala logika oplacenia wydarzenia
 //        PaymentEn paymentEn = new PaymentEn();

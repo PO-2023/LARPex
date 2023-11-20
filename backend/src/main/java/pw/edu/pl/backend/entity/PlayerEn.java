@@ -10,49 +10,49 @@ public class PlayerEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
     @Basic
     @Column(name = "character_id")
-    private Integer characterId;
+    private Long characterId;
     @Basic
     @Column(name = "play_id")
-    private Integer playId;
+    private Long playId;
     @Basic
     @Column(name = "rank")
     private Integer rank;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getCharacterId() {
+    public Long getCharacterId() {
         return characterId;
     }
 
-    public void setCharacterId(Integer characterId) {
+    public void setCharacterId(Long characterId) {
         this.characterId = characterId;
     }
 
-    public Integer getPlayId() {
+    public Long getPlayId() {
         return playId;
     }
 
-    public void setPlayId(Integer playId) {
+    public void setPlayId(Long playId) {
         this.playId = playId;
     }
 

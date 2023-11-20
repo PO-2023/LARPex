@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 import pw.edu.pl.backend.entity.EnrollEn;
 
 @Repository
-public interface EnrollRepository extends JpaRepository<EnrollEn, Integer> {
-    EnrollEn findByPaymentId(Integer paymentId);
+public interface EnrollRepository extends JpaRepository<EnrollEn, Long> {
+    EnrollEn findByPaymentId(Long paymentId);
 
     EnrollEn findByUserId(Long id);
 }

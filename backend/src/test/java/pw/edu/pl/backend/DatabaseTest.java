@@ -77,6 +77,6 @@ public class DatabaseTest {
     @Test
     void getAllPayments() {
         List<PaymentEn> payments = paymentRepository.findAll();
-        assertEquals(3, payments.size());
+        assertEquals(27, payments.size());
     }
 }

@@ -19,7 +19,7 @@ public class EventRepositoryMapper implements IEventRepositoryMapper {
     }
 
     public EventDto getEventByIdMap(Long eventId){
-        return eventRepository.findById(Math.toIntExact(eventId))
+        return eventRepository.findById(eventId)
                 .map(EventMapper.INSTANCE::mapToEventDto)
                 .orElse(null);
     }

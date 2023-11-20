@@ -17,7 +17,7 @@ public class PaymentController {
     private final IPaymentService paymentService;
 
     @GetMapping("/processPayment/{paymentId}/{method}")
-    public ResponseEntity<String> processPayment(@PathVariable String method, @PathVariable Integer paymentId){
+    public ResponseEntity<String> processPayment(@PathVariable String method, @PathVariable Long paymentId){
         try {
             paymentService.processPayment(paymentId,method);
         }catch (Exception e){

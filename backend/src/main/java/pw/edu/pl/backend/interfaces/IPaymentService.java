@@ -6,6 +6,6 @@ import pw.edu.pl.backend.modelDto.PaymentStatusDto;
 public interface IPaymentService {
 
     public PaymentStatusDto createPaymentRequest(PaymentRequestDto paymentRequestDto);
-    public void processPayment(Integer paymentId,String method) throws Exception;
+    public void processPayment(Long paymentId,String method) throws Exception;
 
 }
