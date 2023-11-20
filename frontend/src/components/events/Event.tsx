@@ -26,6 +26,8 @@ const Event: FC<EventProps> = ({ event, isTable = true }) => {
   if (isTable) {
     return (
       <TableRow
+        onClick={() => setSelectedEvent(event)}
+        key={event.id}
         className={cn(
           "cursor-pointer text-xs sm:text-sm",
           selectedEvent?.id === event.id && "bg-gray-100 hover:bg-gray-100"

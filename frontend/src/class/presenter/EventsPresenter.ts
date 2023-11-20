@@ -1,53 +1,52 @@
-import {DialogData, DialogType} from "@/dispatcher/dialogDispatcher";
-import {EnrollEventDTO} from "@/class/dto/EnrollEventDTO";
-import {EventDTO} from "@/class/dto/EventDTO";
-import {Dispatch, SetStateAction} from "react";
+import { DialogData, DialogType } from "@/dispatcher/dialogDispatcher";
+import { EnrollEventDTO } from "@/class/dto/EnrollEventDTO";
+import { EventDTO } from "@/class/dto/EventDTO";
+import { Dispatch, SetStateAction } from "react";
 
 export interface IEventsPresenter {
-    dispatchPayment(result: EnrollEventDTO | undefined)
+  dispatchPayment(result: EnrollEventDTO | undefined): void;
 
-    dispatchDescription()
+  dispatchDescription(): void;
 
-    setEvents(events: EventDTO[])
+  setEvents(events: EventDTO[]): void;
 
-    stopLoading()
+  stopLoading(): void;
 
-    startLoading()
+  startLoading(): void;
 }
 
 export class EventsPresenter implements IEventsPresenter {
-    constructor(
-        private dialogDispatcher: (type: DialogType, data?: DialogData) => void,
-        private events: Dispatch<SetStateAction<EventDTO[]>>,
-        private loading: (isLoading: boolean) => void
-    ) {
-    }
+  constructor(
+    private dialogDispatcher: (type: DialogType, data?: DialogData) => void,
+    private events: Dispatch<SetStateAction<EventDTO[]>>,
+    private loading: (isLoading: boolean) => void
+  ) {}
 
-    dispatchPayment(result: EnrollEventDTO | undefined) {
-        if (result) {
-            this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
-                paymentData: result,
-            });
-        } else {
-            this.dialogDispatcher(DialogType.ERROR_DIALOG, {
-                message: "Błąd zapisu"
-            });
-        }
+  dispatchPayment(result: EnrollEventDTO | undefined) {
+    if (result) {
+      this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
+        paymentData: result,
+      });
+    } else {
+      this.dialogDispatcher(DialogType.ERROR_DIALOG, {
+        message: "Błąd zapisu",
+      });
     }
+  }
 
-    dispatchDescription() {
-        this.dialogDispatcher(DialogType.DESCRIPTION_DIALOG);
-    }
+  dispatchDescription() {
+    this.dialogDispatcher(DialogType.DESCRIPTION_DIALOG);
+  }
 
-    setEvents(events: EventDTO[]) {
-        this.events(events);
-    }
+  setEvents(events: EventDTO[]) {
+    this.events(events);
+  }
 
-    startLoading() {
-        this.loading(true);
-    }
+  startLoading() {
+    this.loading(true);
+  }
 
-    stopLoading() {
-        this.loading(false);
-    }
+  stopLoading() {
+    this.loading(false);
+  }
 }
