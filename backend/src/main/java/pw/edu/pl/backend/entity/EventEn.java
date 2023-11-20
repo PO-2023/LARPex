@@ -14,7 +14,7 @@ public class EventEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "name")
     private String name;
@@ -32,13 +32,13 @@ public class EventEn {
     private String status;
     @Basic
     @Column(name = "game_id")
-    private Integer gameId;
+    private Long gameId;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -82,11 +82,11 @@ public class EventEn {
         this.status = status;
     }
 
-    public Integer getGameId() {
+    public Long getGameId() {
         return gameId;
     }
 
-    public void setGameId(Integer gameId) {
+    public void setGameId(Long gameId) {
         this.gameId = gameId;
     }
 

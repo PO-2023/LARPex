@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pw.edu.pl.backend.entity.UserEn;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEn,Integer> {
+public interface UserRepository extends JpaRepository<UserEn,Long> {
 }

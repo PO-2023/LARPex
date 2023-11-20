@@ -10,7 +10,7 @@ public class GameEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "description")
     private String description;
@@ -27,11 +27,11 @@ public class GameEn {
     @Column(name = "difficulty")
     private String difficulty;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

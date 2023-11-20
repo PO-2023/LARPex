@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pw.edu.pl.backend.entity.PlayerEn;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<PlayerEn, Integer> {
+public interface PlayerRepository extends JpaRepository<PlayerEn, Long> {
 }

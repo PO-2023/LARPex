@@ -10,7 +10,7 @@ public class PlayEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "event_id")
     private Integer eventId;
@@ -18,11 +18,11 @@ public class PlayEn {
     @Column(name = "number_of_players")
     private Integer numberOfPlayers;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pw.edu.pl.backend.entity.CharacterEn;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<CharacterEn, Integer> {
+public interface CharacterRepository extends JpaRepository<CharacterEn, Long> {
 }

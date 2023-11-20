@@ -35,7 +35,7 @@ public class EventService implements IEventService {
         var events = eventRepositoryMapper.getAllEventsMap();
         List<EventWithGameDto> eventsWithGame = new ArrayList<>();
         for (var event : events) {
-            var game = gameRepository.findById(Math.toIntExact(event.getGameId())).get();
+            var game = gameRepository.findById(event.getGameId()).get();
             EventWithGameDto eventWithGameDto = new EventWithGameDto(event.getId(), event.getName(),
                     event.getPrice(), event.getStartTime(), event.getEndTime(), event.getStatus(), game);
             eventsWithGame.add(eventWithGameDto);
@@ -62,7 +62,7 @@ public class EventService implements IEventService {
         List<EventWithGameDto> eventsWithGame = new ArrayList<>();
 
         for (var event : events) {
-            var game = gameRepository.findById(Math.toIntExact(event.getGameId())).get();
+            var game = gameRepository.findById(event.getGameId()).get();
             EventWithGameDto eventWithGameDto = new EventWithGameDto(event.getId(), event.getName(),
                     event.getPrice(), event.getStartTime(), event.getEndTime(), event.getStatus(), game);
             eventsWithGame.add(eventWithGameDto);
@@ -91,7 +91,7 @@ public class EventService implements IEventService {
 
     @Override
     public boolean unlockSlot(Long eventId) {
-        EventDto eventWithId = eventRepository.findById(Math.toIntExact(eventId))
+        EventDto eventWithId = eventRepository.findById(eventId)
                 .map(EventMapper.INSTANCE::mapToEventDto)
                 .orElse(null);
 
@@ -109,7 +109,7 @@ public class EventService implements IEventService {
     }
 
     private boolean lockSLot(Long eventId) {
-        EventDto eventWithId = eventRepository.findById(Math.toIntExact(eventId))
+        EventDto eventWithId = eventRepository.findById(eventId)
                 .map(EventMapper.INSTANCE::mapToEventDto)
                 .orElse(null);
 
