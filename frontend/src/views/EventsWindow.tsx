@@ -48,10 +48,7 @@ const EventsWindow = () => {
             {selectedEvent && (
               <EnrollToEventButton
                 onClick={() =>
-                  controller.enroll({
-                    playerId: 123,
-                    eventId: selectedEvent?.id,
-                  })
+                  controller.enroll(0, selectedEvent?.id)
                 }
               />
             )}
