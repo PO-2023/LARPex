@@ -4,16 +4,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pw.edu.pl.backend.interfaces.IPlayerService;
 import pw.edu.pl.backend.modelDto.PlayerDto;
 import pw.edu.pl.backend.modelDto.PlayerWithActiveEventDto;
-import pw.edu.pl.backend.service.PlayerService;
 
 @RestController
 public class PlayerController {
 
-    private final PlayerService playerService;
+    private final IPlayerService playerService;
     
-    public PlayerController(PlayerService playerService) {
+    public PlayerController(IPlayerService playerService) {
         this.playerService = playerService;
     }
 
