@@ -22,6 +22,7 @@ public class EventService implements IEventService {
     //////
     GameService gameService;
     IPaymentService paymentService;
+
     IEventRepositoryMapper eventRepositoryMapper;
 
     public List<EventWithGameDto> getAllEvents() {
