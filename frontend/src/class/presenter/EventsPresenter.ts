@@ -1,35 +1,48 @@
-import { DialogData, DialogType } from "@/stores/dialogStore/dialogStore";
-import { EnrollEventDTO } from "@/class/dto/EnrollEventDTO";
-import { EventDTO } from "@/class/dto/EventDTO";
-import { Dispatch, SetStateAction } from "react";
+import {DialogData, DialogType} from "@/stores/dialogStore/dialogStore";
+import {EnrollEventDTO} from "@/class/dto/EnrollEventDTO";
+import {EventDTO} from "@/class/dto/EventDTO";
+import {Dispatch, SetStateAction} from "react";
 
-export class EventsPresenter {
-  constructor(
-    private dialogDispatcher: (type: DialogType, data?: DialogData) => void,
-    private events: Dispatch<SetStateAction<EventDTO[]>>,
-    private loading: (isLoading: boolean) => void
-  ) {}
+export interface IEventsPresenter {
+    dispatchPayment(result: EnrollEventDTO)
 
-  dispatchPayment(result: EnrollEventDTO) {
-    this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
-      paymentData: result,
-    });
-  }
+    dispatchDescription()
 
-  dispatchDescription() {
-    this.dialogDispatcher(DialogType.DESCRIPTION_DIALOG);
-  }
+    setEvents(events: EventDTO[])
 
-  setEvents(events: EventDTO[]) {
-    this.events(events);
-    this.stopLoading();
-  }
+    stopLoading()
 
-  startLoading() {
-    this.loading(true);
-  }
+    startLoading()
+}
 
-  stopLoading() {
-    this.loading(false);
-  }
+export class EventsPresenter implements IEventsPresenter {
+    constructor(
+        private dialogDispatcher: (type: DialogType, data?: DialogData) => void,
+        private events: Dispatch<SetStateAction<EventDTO[]>>,
+        private loading: (isLoading: boolean) => void
+    ) {
+    }
+
+    dispatchPayment(result: EnrollEventDTO) {
+        this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
+            paymentData: result,
+        });
+    }
+
+    dispatchDescription() {
+        this.dialogDispatcher(DialogType.DESCRIPTION_DIALOG);
+    }
+
+    setEvents(events: EventDTO[]) {
+        this.events(events);
+        this.stopLoading();
+    }
+
+    startLoading() {
+        this.loading(true);
+    }
+
+    stopLoading() {
+        this.loading(false);
+    }
 }

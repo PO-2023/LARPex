@@ -1,12 +1,12 @@
 import {EnrollEventDTO} from "@/class/dto/EnrollEventDTO";
-import {EventsPresenter} from "@/class/presenter/EventsPresenter";
+import {IEventsPresenter} from "@/class/presenter/EventsPresenter";
 
 export interface IEnrollToEvent {
     enrollToEvent(playedId: number, eventId: number): EnrollEventDTO
 }
 
 export class EnrollToEvent implements IEnrollToEvent {
-    constructor(private presenter: EventsPresenter) {
+    constructor(private presenter: IEventsPresenter) {
     }
 
     enrollToEvent(playedId: number, eventId: number): EnrollEventDTO {
