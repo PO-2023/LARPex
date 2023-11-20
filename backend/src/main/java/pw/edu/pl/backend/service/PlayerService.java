@@ -64,7 +64,7 @@ public class PlayerService implements IPlayerService {
         return userRepository.findAll()
                 .stream()
                 .map(UserMapper.INSTANCE::mapToUserEn)
-                .filter(userEn -> userEn.getId() == player.getUserId())
+                .filter(userEn -> player.getUserId()!=null && userEn.getId() == player.getUserId())
                 .toList()
                 .get(0);
     }
