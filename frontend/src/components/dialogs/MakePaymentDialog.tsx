@@ -32,15 +32,8 @@ const MakePaymentDialog = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    cPayment.makePayment(paymentData?.paymentId, values.methodType).then((response) => {
-      if (response) {
-        dialogDispatcher(DialogType.SUCCESS_DIALOG);
-      } else {
-        dialogDispatcher(DialogType.ERROR_DIALOG);
-      }
-    });
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    await cPayment.handlePayment(data, paymentData, setIsLoading);
   }
 
   if (!selectedEvent) return;
