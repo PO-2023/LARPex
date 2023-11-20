@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pw.edu.pl.backend.interfaces.IEventService;
 import pw.edu.pl.backend.modelDto.EnrollEventDto;
 import pw.edu.pl.backend.modelDto.EventDto;
+import pw.edu.pl.backend.modelDto.EventWithGameDto;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class EventController {
 
 
     @GetMapping("/event")
-    public ResponseEntity<List<EventDto>> getEvents(
+    public ResponseEntity<List<EventWithGameDto>> getEvents(
             @RequestParam(name = "dateFrom", required = false) String dateFrom,
             @RequestParam(name = "dateTo", required = false) String dateTo) {
 

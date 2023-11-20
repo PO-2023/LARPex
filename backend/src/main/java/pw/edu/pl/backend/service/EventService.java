@@ -7,11 +7,9 @@ import pw.edu.pl.backend.interfaces.IEventService;
 import pw.edu.pl.backend.interfaces.IPaymentService;
 import pw.edu.pl.backend.mapper.EventMapper;
 import pw.edu.pl.backend.model.Status;
-import pw.edu.pl.backend.modelDto.EnrollEventDto;
-import pw.edu.pl.backend.modelDto.EventDto;
-import pw.edu.pl.backend.modelDto.PaymentRequestDto;
-import pw.edu.pl.backend.modelDto.PaymentStatusDto;
+import pw.edu.pl.backend.modelDto.*;
 import pw.edu.pl.backend.repository.EventRepository;
+import pw.edu.pl.backend.repository.GameRepository;
 import pw.edu.pl.backend.repositoryMapper.EventRepositoryMapper;
 import pw.edu.pl.backend.repositoryMapper.IEventRepositoryMapper;
 
@@ -34,30 +32,50 @@ public class EventService implements IEventService {
     //////
     GameService gameService;
 
+    GameRepository gameRepository;
+
     IPaymentService paymentService;
 
     IEventRepositoryMapper eventRepositoryMapper;
 
-    public List<EventDto> getAllEvents() {
-        return eventRepositoryMapper.getAllEventsMap();
+    public List<EventWithGameDto> getAllEvents() {
+        var events = eventRepositoryMapper.getAllEventsMap();
+        List<EventWithGameDto> eventsWithGame = new ArrayList<>();
+        for (var event : events) {
+            var game = gameRepository.findById(Math.toIntExact(event.getGameId())).get();
+            EventWithGameDto eventWithGameDto = new EventWithGameDto(event.getId(), event.getName(),
+                    event.getPrice(), event.getStartTime(), event.getEndTime(), event.getStatus(), game);
+            eventsWithGame.add(eventWithGameDto);
+        }
+        return eventsWithGame;
     }
 
-    public List<EventDto> getEvents(String dateFrom, String dateTo) {
+    public List<EventWithGameDto> getEvents(String dateFrom, String dateTo) {
         LocalDateTime dateTimeFrom;
         LocalDateTime dateTimeTo;
         try {
             dateTimeFrom = LocalDateTime.parse(dateFrom + "T00:00:00");
-            dateTimeTo = LocalDateTime.parse(dateTo  + "T00:00:00");
+            dateTimeTo = LocalDateTime.parse(dateTo + "T00:00:00");
             System.out.println(dateTimeTo);
 
         } catch (DateTimeParseException exception) {
             throw exception;
         }
-        return eventRepositoryMapper.getAllEventsMap().stream()
+        var events = eventRepositoryMapper.getAllEventsMap().stream()
                 .filter(eventDto ->
                         eventDto.getStartTime().isAfter(dateTimeFrom)
                                 && eventDto.getEndTime().isBefore(dateTimeTo))
                 .collect(Collectors.toList());
+        List<EventWithGameDto> eventsWithGame = new ArrayList<>();
+
+        for (var event : events) {
+            var game = gameRepository.findById(Math.toIntExact(event.getGameId())).get();
+            EventWithGameDto eventWithGameDto = new EventWithGameDto(event.getId(), event.getName(),
+                    event.getPrice(), event.getStartTime(), event.getEndTime(), event.getStatus(), game);
+            eventsWithGame.add(eventWithGameDto);
+        }
+
+        return eventsWithGame;
     }
 
 

@@ -18,12 +18,13 @@ public class EventDto {
     private Long gameId;
     private int players;
 
-    public EventDto(Long id, String name, Double price, LocalDateTime startTime, LocalDateTime endTime, Status status) {
+    public EventDto(Long id, String name, Double price, LocalDateTime startTime, LocalDateTime endTime, Status status, Long gameId) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
+        this.gameId = gameId;
     }
 }
