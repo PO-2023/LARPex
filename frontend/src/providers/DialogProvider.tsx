@@ -1,7 +1,7 @@
 import EventDescriptionDialog from "@/components/dialogs/EventDescriptionDialog";
 import MakePaymentDialog from "@/components/dialogs/MakePaymentDialog";
 import SuccessDialog from "@/components/dialogs/SuccessDialog";
-import {DialogType, useDialog} from "@/stores/dialogStore/dialogStore";
+import {DialogType, useDialog} from "@/dispatcher/dialogDispatcher";
 import ErrorDialog from "@/components/dialogs/ErrorDialog.tsx";
 
 

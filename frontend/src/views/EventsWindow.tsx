@@ -9,7 +9,7 @@ import {DisplayEventList, IDisplayEventList,} from "@/usecase/event/IDisplayEven
 import {EventsController} from "@/class/controller/EventsController";
 import {EnrollToEvent, IEnrollToEvent} from "@/usecase/event/IEnrollToEvent";
 import {EventsPresenter, IEventsPresenter} from "@/class/presenter/EventsPresenter";
-import {useDialog} from "@/stores/dialogStore/dialogStore";
+import {useDialog} from "@/dispatcher/dialogDispatcher";
 import {Loader2} from "lucide-react";
 import {EventDTO} from "@/class/dto/EventDTO";
 
@@ -48,10 +48,7 @@ const EventsWindow = () => {
             {selectedEvent && (
               <EnrollToEventButton
                 onClick={() =>
-                  controller.enroll({
-                    playerId: 123,
-                    eventId: selectedEvent?.id,
-                  })
+                  controller.enroll(0, selectedEvent?.id)
                 }
               />
             )}

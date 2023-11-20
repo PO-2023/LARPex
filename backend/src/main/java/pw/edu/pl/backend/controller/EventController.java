@@ -40,8 +40,8 @@ public class EventController {
         return eventService.getEventById(eventId);
     }
 
-    @PostMapping("/event/{id}")
-    public EnrollEventDto enrollToEvent(@PathVariable Long id, @RequestBody Long userId) {
+    @PostMapping("/event/{id}/{userId}")
+    public EnrollEventDto enrollToEvent(@PathVariable Long id, @PathVariable Long userId) {
         return eventService.enrollToEvent(id, userId);
     }
 }

@@ -1,22 +1,18 @@
-import {EnrollEventDTO} from "@/class/dto/EnrollEventDTO";
 import {IEventsPresenter} from "@/class/presenter/EventsPresenter";
+import axios from "axios";
 
 export interface IEnrollToEvent {
-    enrollToEvent(playedId: number, eventId: number): EnrollEventDTO
+    enrollToEvent(playerId: number, eventId: number)
 }
 
 export class EnrollToEvent implements IEnrollToEvent {
     constructor(private presenter: IEventsPresenter) {
     }
 
-    enrollToEvent(playedId: number, eventId: number): EnrollEventDTO {
-        const result = {
-            paymentId: 4,
-            price: 20,
-        };
+    async enrollToEvent(playerId: number, eventId: number) {
+        const {data} = await axios.post(`http://localhost:8080/event/${eventId}/${playerId}`);
+        console.log(data)
 
-        this.presenter.dispatchPayment(result)
-
-        return result
+        this.presenter.dispatchPayment(data)
     }
 }

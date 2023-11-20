@@ -1,11 +1,11 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
-import {useDialog} from "@/stores/dialogStore/dialogStore";
+import {useDialog} from "@/dispatcher/dialogDispatcher";
 import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
 import {Button} from "../ui/button";
 
 const ErrorDialog
     = () => {
-  const {closeDialog} = useDialog();
+  const {closeDialog, data} = useDialog();
   const {selectedEvent} = useSelectedEvent();
 
   if (!selectedEvent) return;
@@ -16,7 +16,7 @@ const ErrorDialog
           <DialogHeader>
             <DialogTitle>
             <span className="font-bold text-indigo-500 text-xl">
-              Płatność zakończona niepowodzeniem
+              {data.message}
             </span>
             </DialogTitle>
             <section className="flex flex-col gap-1 text-sm">

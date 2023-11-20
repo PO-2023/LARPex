@@ -48,7 +48,7 @@ public class EventService implements IEventService {
         LocalDateTime dateTimeTo;
         try {
             dateTimeFrom = LocalDateTime.parse(dateFrom + "T00:00:00");
-            dateTimeTo = LocalDateTime.parse(dateTo + "T00:00:00");
+            dateTimeTo = LocalDateTime.parse(dateTo + "T00:00:00").plusDays(1);
             System.out.println(dateTimeTo);
 
         } catch (DateTimeParseException exception) {

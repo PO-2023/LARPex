@@ -10,6 +10,7 @@ export enum DialogType {
 
 export type DialogData =
     | { event?: EventDTO; paymentData?: { paymentId: number; price: number } }
+    | { message?: string }
     | undefined;
 
 type Store = {

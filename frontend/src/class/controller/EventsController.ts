@@ -9,7 +9,8 @@ export class EventsController {
   ) {
   }
 
-  enroll(playerId: number, eventId: number) {
+  enroll(playerId: number, eventId: number | undefined) {
+    if (!eventId) return
     this.enrollToEvent.enrollToEvent(playerId, eventId);
   }
 

@@ -7,4 +7,6 @@ import pw.edu.pl.backend.entity.EnrollEn;
 @Repository
 public interface EnrollRepository extends JpaRepository<EnrollEn, Integer> {
     EnrollEn findByPaymentId(Integer paymentId);
+
+    EnrollEn findByUserId(Long id);
 }

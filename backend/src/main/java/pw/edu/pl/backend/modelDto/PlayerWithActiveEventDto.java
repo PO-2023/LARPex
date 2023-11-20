@@ -9,11 +9,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Data
-public class PlayerDto {
+public class PlayerWithActiveEventDto {
     private Long id;
     private String name;
     private String surname;
     private String nickname;
     private CharacterDto character;
     private int rank;
+    private EventDto activeEvent;
 }
