@@ -39,12 +39,12 @@ public class PaymentService implements IPaymentService {
         if(paymentEn.getMethod().equals("BLIK")) {
             paymentEn.setStatus(PaymentStatus.failure.toString());
             paymentRepository.save(paymentEn);
+            EnrollEn enrollEn = enrollRepository.findByPaymentId(paymentId);
+            eventService.unlockSlot(Long.valueOf(enrollEn.getEventId()));
             throw new Exception("BLIK");
         } else {
             paymentEn.setStatus(PaymentStatus.success.toString());
             paymentRepository.save(paymentEn);
-            EnrollEn enrollEn = enrollRepository.findByPaymentId(paymentId);
-            eventService.unlockSlot(Long.valueOf(enrollEn.getEventId()));
         }
     }
 }
