@@ -8,14 +8,11 @@ import pw.edu.pl.backend.mapper.EventMapper;
 import pw.edu.pl.backend.model.Status;
 import pw.edu.pl.backend.modelDto.*;
 import pw.edu.pl.backend.repository.EventRepository;
-import pw.edu.pl.backend.repository.GameRepository;
 import pw.edu.pl.backend.repositoryMapper.IEventRepositoryMapper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,23 +21,14 @@ public class EventService implements IEventService {
     EventRepository eventRepository;
     //////
     GameService gameService;
-
-    GameRepository gameRepository;
-
     IPaymentService paymentService;
-
     IEventRepositoryMapper eventRepositoryMapper;
 
     public List<EventWithGameDto> getAllEvents() {
         var events = eventRepositoryMapper.getAllEventsMap();
-        List<EventWithGameDto> eventsWithGame = new ArrayList<>();
-        for (var event : events) {
-            var game = gameRepository.findById(Math.toIntExact(event.getGameId())).get();
-            EventWithGameDto eventWithGameDto = new EventWithGameDto(event.getId(), event.getName(),
-                    event.getPrice(), event.getStartTime(), event.getEndTime(), event.getStatus(), game);
-            eventsWithGame.add(eventWithGameDto);
-        }
-        return eventsWithGame;
+        return events.stream()
+                .map(e -> eventRepositoryMapper.getEventWithGameDtoByDate(e))
+                .toList();
     }
 
     public List<EventWithGameDto> getEvents(String dateFrom, String dateTo) {
@@ -58,17 +46,10 @@ public class EventService implements IEventService {
                 .filter(eventDto ->
                         eventDto.getStartTime().isAfter(dateTimeFrom)
                                 && eventDto.getEndTime().isBefore(dateTimeTo))
-                .collect(Collectors.toList());
-        List<EventWithGameDto> eventsWithGame = new ArrayList<>();
-
-        for (var event : events) {
-            var game = gameRepository.findById(Math.toIntExact(event.getGameId())).get();
-            EventWithGameDto eventWithGameDto = new EventWithGameDto(event.getId(), event.getName(),
-                    event.getPrice(), event.getStartTime(), event.getEndTime(), event.getStatus(), game);
-            eventsWithGame.add(eventWithGameDto);
-        }
-
-        return eventsWithGame;
+                .toList();
+        return events.stream()
+                .map(e -> eventRepositoryMapper.getEventWithGameDtoByDate(e))
+                .toList();
     }
 
 
