@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { DoorClosed } from "lucide-react";
 
-const EnrollToEventButton = ({ onClick }) => {
+const EnrollToEventButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <Button
       className="sm:w-32 flex gap-1 bg-indigo-400 hover:bg-indigo-300"
