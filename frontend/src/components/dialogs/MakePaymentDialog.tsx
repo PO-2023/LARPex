@@ -1,5 +1,5 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
-import {DialogType, useDialog} from "@/stores/dialogStore/dialogStore";
+import {DialogType, useDialog} from "@/dispatcher/dialogDispatcher";
 import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
 import {Button} from "../ui/button";
 import {Form, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";

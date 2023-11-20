@@ -1,4 +1,4 @@
-import {DialogData, DialogType} from "@/stores/dialogStore/dialogStore";
+import {DialogData, DialogType} from "@/dispatcher/dialogDispatcher";
 import {EnrollEventDTO} from "@/class/dto/EnrollEventDTO";
 import {EventDTO} from "@/class/dto/EventDTO";
 import {Dispatch, SetStateAction} from "react";

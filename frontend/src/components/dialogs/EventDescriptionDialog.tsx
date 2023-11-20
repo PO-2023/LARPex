@@ -1,23 +1,11 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { useDialog } from "@/stores/dialogStore/dialogStore";
-import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
-import {
-  CalendarCheck,
-  CalendarX,
-  DollarSign,
-  Swords,
-  Users,
-} from "lucide-react";
+import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
+import {useDialog} from "@/dispatcher/dialogDispatcher";
+import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
+import {CalendarCheck, CalendarX, DollarSign, Swords, Users,} from "lucide-react";
 
 const EventDescriptionDialog = () => {
-  const { closeDialog } = useDialog();
-  const { selectedEvent } = useSelectedEvent();
+  const {closeDialog} = useDialog();
+  const {selectedEvent} = useSelectedEvent();
 
   if (!selectedEvent) return;
 
