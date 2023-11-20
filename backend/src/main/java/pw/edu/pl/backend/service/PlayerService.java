@@ -3,6 +3,7 @@ package pw.edu.pl.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pw.edu.pl.backend.entity.EnrollEn;
 import pw.edu.pl.backend.entity.UserEn;
 import pw.edu.pl.backend.interfaces.IPlayerService;
 import pw.edu.pl.backend.mapper.CharacterMapper;
@@ -10,9 +11,13 @@ import pw.edu.pl.backend.mapper.PlayerMapper;
 import pw.edu.pl.backend.mapper.UserMapper;
 import pw.edu.pl.backend.model.Player;
 import pw.edu.pl.backend.model.Character;
+import pw.edu.pl.backend.model.Status;
 import pw.edu.pl.backend.modelDto.CharacterDto;
+import pw.edu.pl.backend.modelDto.EventDto;
 import pw.edu.pl.backend.modelDto.PlayerDto;
+import pw.edu.pl.backend.modelDto.PlayerWithActiveEventDto;
 import pw.edu.pl.backend.repository.CharacterRepository;
+import pw.edu.pl.backend.repository.EnrollRepository;
 import pw.edu.pl.backend.repository.PlayerRepository;
 import pw.edu.pl.backend.repository.UserRepository;
 
@@ -27,6 +32,11 @@ public class PlayerService implements IPlayerService {
 
     @Autowired
     CharacterRepository characterRepository;
+
+    @Autowired
+    EnrollRepository enrollRepository;
+
+    EventService eventService;
 
     @Override
     public PlayerDto getPlayer(Long id) {
@@ -81,5 +91,20 @@ public class PlayerService implements IPlayerService {
             characterDtoBindedToPlayer = new CharacterDto(characterBindedToPlayer.getId(), characterBindedToPlayer.getName(), characterBindedToPlayer.getDescription());
         }
         return characterDtoBindedToPlayer;
+    }
+
+    public PlayerWithActiveEventDto getPlayerWithActiveEvent(Long id) {
+        EnrollEn enrollEn = enrollRepository.findByUserId(id);
+if(enrollEn == null) {
+            return null;
+        } else {
+            EventDto event = eventService.getEventById(Long.valueOf(enrollEn.getEventId()));
+            if(event.getStatus() == Status.Active){
+                return new PlayerWithActiveEventDto(id, getPlayer(id).getName(), getPlayer(id).getSurname(), getPlayer(id).getNickname(), getPlayer(id).getCharacter(), getPlayer(id).getRank(), event);
+            } else {
+                return null;
+            }
+
+        }
     }
 }
