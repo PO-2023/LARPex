@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pw.edu.pl.backend.entity.GameEn;
 
 @Repository
-public interface GameRepository extends JpaRepository<GameEn, Integer> {
+public interface GameRepository extends JpaRepository<GameEn, Long> {
 }

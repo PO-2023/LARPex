@@ -1,10 +1,7 @@
 package pw.edu.pl.backend.modelDto;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import pw.edu.pl.backend.entity.GameEn;
 import pw.edu.pl.backend.model.Status;
 
 import java.time.LocalDateTime;
@@ -18,8 +15,7 @@ public class EventWithGameDto {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Status status;
-    private GameEn game;
-    //TODO: add players & game title
-    //TODO: exchange max_players -> player_limit
+    private Integer players;
+    private GameDto game;
 
 }

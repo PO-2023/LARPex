@@ -12,7 +12,6 @@ import pw.edu.pl.backend.modelDto.PlayerDto;
 import pw.edu.pl.backend.modelDto.PlayerWithActiveEventDto;
 import pw.edu.pl.backend.repository.EnrollRepository;
 import pw.edu.pl.backend.repositoryMapper.IPlayerRepositoryMapper;
-import pw.edu.pl.backend.repositoryMapper.PlayerRepositoryMapper;
 
 @Service
 public class PlayerService implements IPlayerService {

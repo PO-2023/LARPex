@@ -6,14 +6,30 @@ import Logo from "./Logo";
 import { cn } from "@/lib/utils";
 import JoinPlayButton from "./events/JoinPlayButton";
 import { PlayClient } from "@/class/IPlay";
+import { EventApiClient } from '@/gateway/EventApiClient';
+import {useEffect, useState} from "react";
+import {PlayerDto} from "@/class/dto/PlayerDto";
+import {EventDTO} from "@/class/dto/EventDTO";
+import {PlayerWithActiveEventDto} from "@/class/dto/PlayerWithActiveEventDto";
 const Header = () => {
+  const [activePlayData, setActivePlayData] = useState<PlayerWithActiveEventDto | null>(null);
   const location = useLocation();
 
   const playActive = location.pathname.includes("play");
-  const playClient = new PlayClient();
-  const data = playClient.checkForAvailablePlay(12);
-  //TODO: Query for active event
-  const joinPlay = 12127183;
+  const eventClient = new EventApiClient();
+  const userId = 1;
+
+  useEffect(() => {
+    eventClient.getActiveEvent(userId)
+        .then(data => {
+          setActivePlayData(data)
+        })
+        .catch(error => {
+          console.error('Error fetching player data:', error);
+          // Handle error (e.g., set error state, show error message)
+        });
+  }, []); // Empty dependency array to run only on mount
+
   return (
     <>
       <header className="w-screen h-20 flex items-center px-3 sm:px-14 justify-between">
@@ -28,7 +44,7 @@ const Header = () => {
             )}
           >
             {
-              data&&<JoinPlayButton onJoinPlay={joinPlay}/>
+              activePlayData&&<JoinPlayButton onJoinPlay={activePlayData.id}/>
             }
             <Link to={`/events`}>
               <Button
@@ -41,13 +57,6 @@ const Header = () => {
                 <CalendarRange />
               </Button>
             </Link>
-
-            <Button
-              variant="ghost"
-              className="cursor-pointer flex hover:text-indigo-400"
-            >
-              <Settings />
-            </Button>
           </ul>
         </nav>
       </header>

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pw.edu.pl.backend.entity.PaymentEn;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<PaymentEn, Integer> {
+public interface PaymentRepository extends JpaRepository<PaymentEn, Long> {
 }

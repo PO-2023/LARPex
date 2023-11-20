@@ -10,49 +10,49 @@ public class EnrollEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
-    private int id;
+    private Long id;
     @Basic
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
     @Basic
     @Column(name = "event_id")
-    private Integer eventId;
+    private Long eventId;
     @Basic
     @Column(name = "payment_id")
-    private Integer paymentId;
+    private Long paymentId;
     @Basic
     @Column(name = "payment_status")
     private String paymentStatus;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Integer getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
-    public void setEventId(Integer eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
-    public Integer getPaymentId() {
+    public Long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(Integer paymentId) {
+    public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
     }
 

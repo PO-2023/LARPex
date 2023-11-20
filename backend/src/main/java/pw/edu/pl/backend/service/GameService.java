@@ -16,7 +16,7 @@ public class GameService {
     GameRepository gameRepository;
 
     public GameDto findGameById(Long gameId) {
-        return gameRepository.findById(Math.toIntExact(gameId))
+        return gameRepository.findById(gameId)
                 .map(GameMapper.INSTANCE::mapToGameDto)
                 .orElse(null);
     }
