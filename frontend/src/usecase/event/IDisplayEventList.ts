@@ -27,6 +27,7 @@ export class DisplayEventList implements IDisplayEventList {
         } catch (e) {
             this.presenter.setEvents([])
         }
+        this.presenter.stopLoading()
     }
 
     formatDateToYYYYMMDD(date) {

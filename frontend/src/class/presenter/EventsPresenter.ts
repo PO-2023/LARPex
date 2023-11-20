@@ -35,7 +35,6 @@ export class EventsPresenter implements IEventsPresenter {
 
     setEvents(events: EventDTO[]) {
         this.events(events);
-        this.stopLoading();
     }
 
     startLoading() {
