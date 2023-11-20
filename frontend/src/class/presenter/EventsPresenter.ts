@@ -4,7 +4,7 @@ import {EventDTO} from "@/class/dto/EventDTO";
 import {Dispatch, SetStateAction} from "react";
 
 export interface IEventsPresenter {
-    dispatchPayment(result: EnrollEventDTO)
+    dispatchPayment(result: EnrollEventDTO | undefined)
 
     dispatchDescription()
 
@@ -23,10 +23,16 @@ export class EventsPresenter implements IEventsPresenter {
     ) {
     }
 
-    dispatchPayment(result: EnrollEventDTO) {
-        this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
-            paymentData: result,
-        });
+    dispatchPayment(result: EnrollEventDTO | undefined) {
+        if (result) {
+            this.dialogDispatcher(DialogType.MAKE_PAYMENT_DIALOG, {
+                paymentData: result,
+            });
+        } else {
+            this.dialogDispatcher(DialogType.ERROR_DIALOG, {
+                message: "Błąd zapisu"
+            });
+        }
     }
 
     dispatchDescription() {

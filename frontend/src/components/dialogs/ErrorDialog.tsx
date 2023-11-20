@@ -5,7 +5,7 @@ import {Button} from "../ui/button";
 
 const ErrorDialog
     = () => {
-  const {closeDialog} = useDialog();
+  const {closeDialog, data} = useDialog();
   const {selectedEvent} = useSelectedEvent();
 
   if (!selectedEvent) return;
@@ -16,7 +16,7 @@ const ErrorDialog
           <DialogHeader>
             <DialogTitle>
             <span className="font-bold text-indigo-500 text-xl">
-              Płatność zakończona niepowodzeniem
+              {data.message}
             </span>
             </DialogTitle>
             <section className="flex flex-col gap-1 text-sm">
