@@ -31,7 +31,7 @@ public class EventRepositoryMapper implements IEventRepositoryMapper {
     }
 
     public EventWithGameDto getEventWithGameDtoByDate(EventDto event){
-        var game = gameRepository.findById(Math.toIntExact(event.getGameId())).map(GameMapper.INSTANCE::mapToGameDto).get();
+        var game = gameRepository.findById(event.getGameId()).map(GameMapper.INSTANCE::mapToGameDto).get();
         var play = playRepository.findByEventId(Math.toIntExact(event.getGameId()));
         return new EventWithGameDto(event.getId(), event.getName(),
                 event.getPrice(), event.getStartTime(), event.getEndTime(),

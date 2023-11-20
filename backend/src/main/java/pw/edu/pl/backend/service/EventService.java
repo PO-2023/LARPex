@@ -73,7 +73,7 @@ public class EventService implements IEventService {
 
     @Override
     public boolean unlockSlot(Long eventId) {
-        EventDto eventWithId = eventRepository.findById(Math.toIntExact(eventId))
+        EventDto eventWithId = eventRepository.findById(eventId)
                 .map(EventMapper.INSTANCE::mapToEventDto)
                 .orElse(null);
 
@@ -91,7 +91,7 @@ public class EventService implements IEventService {
     }
 
     private boolean lockSLot(Long eventId) {
-        EventDto eventWithId = eventRepository.findById(Math.toIntExact(eventId))
+        EventDto eventWithId = eventRepository.findById(eventId)
                 .map(EventMapper.INSTANCE::mapToEventDto)
                 .orElse(null);
 
