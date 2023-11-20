@@ -27,9 +27,7 @@ const Header = () => {
               playActive && "hidden"
             )}
           >
-            {
-              data&&<JoinPlayButton onJoinPlay={joinPlay}/>
-            }
+            {data && <JoinPlayButton onJoinPlay={joinPlay} />}
             <Link to={`/events`}>
               <Button
                 variant="ghost"
@@ -41,13 +39,6 @@ const Header = () => {
                 <CalendarRange />
               </Button>
             </Link>
-
-            <Button
-              variant="ghost"
-              className="cursor-pointer flex hover:text-indigo-400"
-            >
-              <Settings />
-            </Button>
           </ul>
         </nav>
       </header>
