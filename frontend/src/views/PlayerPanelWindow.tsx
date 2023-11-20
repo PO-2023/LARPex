@@ -7,15 +7,14 @@ const PlayerPanelWindow: React.FC = () => {
     const playerApiClient = new PlayerApiClient();
 
     useEffect(() => {
-        playerApiClient.getPlayer(2)
+        playerApiClient.getPlayer(1)
             .then(data => {
                 setPlayerData(data);
             })
             .catch(error => {
                 console.error('Error fetching player data:', error);
-                // Handle error (e.g., set error state, show error message)
             });
-    }, []); // Empty dependency array to run only on mount
+    }, []);
 
     if (!playerData) {
         return <p>Loading...</p>;

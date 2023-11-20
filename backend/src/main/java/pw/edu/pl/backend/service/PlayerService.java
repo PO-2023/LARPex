@@ -36,6 +36,7 @@ public class PlayerService implements IPlayerService {
     @Autowired
     EnrollRepository enrollRepository;
 
+    @Autowired
     EventService eventService;
 
     @Override

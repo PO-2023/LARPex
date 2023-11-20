@@ -7,20 +7,28 @@ import { cn } from "@/lib/utils";
 import JoinPlayButton from "./events/JoinPlayButton";
 import { PlayClient } from "@/class/IPlay";
 import { EventApiClient } from '@/gateway/EventApiClient';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {PlayerDto} from "@/class/dto/PlayerDto";
 import {EventDTO} from "@/class/dto/EventDTO";
+import {PlayerWithActiveEventDto} from "@/class/dto/PlayerWithActiveEventDto";
 const Header = () => {
-  const [eventData, setEventData] = useState<EventDTO | null>(null);
+  const [activePlayData, setActivePlayData] = useState<PlayerWithActiveEventDto | null>(null);
   const location = useLocation();
 
   const playActive = location.pathname.includes("play");
-  const playClient = new PlayClient();
   const eventClient = new EventApiClient();
-  const playId = 1;
-  const promise = eventClient.getEvent(playId).then(e => setEventData(e));
-  //TODO: Query for active event
-  const joinPlay = 12127183;
+  const userId = 1;
+
+  useEffect(() => {
+    eventClient.getActiveEvent(userId)
+        .then(data => {
+          setActivePlayData(data)
+        })
+        .catch(error => {
+          console.error('Error fetching player data:', error);
+          // Handle error (e.g., set error state, show error message)
+        });
+  }, []); // Empty dependency array to run only on mount
 
   return (
     <>
@@ -36,7 +44,7 @@ const Header = () => {
             )}
           >
             {
-              eventData&&<JoinPlayButton onJoinPlay={joinPlay}/>
+              activePlayData&&<JoinPlayButton onJoinPlay={activePlayData.id}/>
             }
             <Link to={`/events`}>
               <Button
