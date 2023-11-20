@@ -19,4 +19,7 @@ public class EventWithGameDto {
     private LocalDateTime endTime;
     private Status status;
     private GameEn game;
+    //TODO: add players & game title
+    //TODO: exchange max_players -> player_limit
+
 }
