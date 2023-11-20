@@ -49,13 +49,6 @@ const Header = () => {
                 <CalendarRange />
               </Button>
             </Link>
-
-            <Button
-              variant="ghost"
-              className="cursor-pointer flex hover:text-indigo-400"
-            >
-              <Settings />
-            </Button>
           </ul>
         </nav>
       </header>
