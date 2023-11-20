@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pw.edu.pl.backend.interfaces.IEventService;
 import pw.edu.pl.backend.interfaces.IPaymentService;
-import pw.edu.pl.backend.mapper.EventMapper;
 import pw.edu.pl.backend.model.Status;
 import pw.edu.pl.backend.modelDto.*;
-import pw.edu.pl.backend.repository.EventRepository;
 import pw.edu.pl.backend.repositoryMapper.IEventRepositoryMapper;
 
 import java.time.LocalDateTime;
@@ -17,9 +15,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class EventService implements IEventService {
-    // do usunięcia bo smailek chcial miec dodatkowa warstwe z repository
-    EventRepository eventRepository;
-    //////
     GameService gameService;
     IPaymentService paymentService;
 
@@ -73,16 +68,14 @@ public class EventService implements IEventService {
 
     @Override
     public boolean unlockSlot(Long eventId) {
-        EventDto eventWithId = eventRepository.findById(eventId)
-                .map(EventMapper.INSTANCE::mapToEventDto)
-                .orElse(null);
+        EventDto eventWithId = eventRepositoryMapper.getEventByIdMap(eventId);
 
         if (eventWithId == null) {
             return false;
         } else {
             if (eventWithId.getStatus() == Status.Active) {
                 eventWithId.setPlayers(eventWithId.getPlayers() - 1);
-                eventRepository.save(EventMapper.INSTANCE.mapToEvent(eventWithId));
+                eventRepositoryMapper.saveEvent(eventWithId);
                 return true;
             } else {
                 return false;
@@ -91,9 +84,7 @@ public class EventService implements IEventService {
     }
 
     private boolean lockSLot(Long eventId) {
-        EventDto eventWithId = eventRepository.findById(eventId)
-                .map(EventMapper.INSTANCE::mapToEventDto)
-                .orElse(null);
+        EventDto eventWithId = eventRepositoryMapper.getEventByIdMap(eventId);
 
         if (eventWithId == null) {
             return false;
@@ -104,7 +95,7 @@ public class EventService implements IEventService {
                     return false;
                 } else {
                     eventWithId.setPlayers(eventWithId.getPlayers() + 1);
-                    eventRepository.save(EventMapper.INSTANCE.mapToEvent(eventWithId));
+                    eventRepositoryMapper.saveEvent(eventWithId);
                     return true;
                 }
             } else {

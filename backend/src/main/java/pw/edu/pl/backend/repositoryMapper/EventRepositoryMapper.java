@@ -38,4 +38,7 @@ public class EventRepositoryMapper implements IEventRepositoryMapper {
                 event.getStatus(), play.getNumberOfPlayers(), game);
     }
 
+    public void saveEvent(EventDto event) {
+        eventRepository.save(EventMapper.INSTANCE.mapToEvent(event));
+    }
 }

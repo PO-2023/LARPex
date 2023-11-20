@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import pw.edu.pl.backend.entity.*;
 import pw.edu.pl.backend.repository.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,6 +32,15 @@ public class DatabaseTest {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @Test
+    void findEventsBetweenTimes() {
+        LocalDateTime dateTimeFrom;
+        LocalDateTime dateTimeTo;
+        dateTimeFrom = LocalDateTime.parse("2023-11-15" + "T00:00:00");
+        dateTimeTo = LocalDateTime.parse("2023-11-15" + "T00:00:00").plusDays(1);
+        List<EventEn> events = eventRepository.findByStartTimeAfterAndEndTimeBefore(dateTimeFrom, dateTimeTo);
+        assertEquals(1, events.size());
+    }
 
     @Test
     void getAllEvents() {
