@@ -66,7 +66,9 @@ public class EventService implements IEventService {
 
         PaymentStatusDto paymentStatusDTO = paymentService.createPaymentRequest(new PaymentRequestDto("PayPal"));
 
-        return new EnrollEventDto(paymentStatusDTO.getId());
+        EventDto eventDto = getEventById(eventId);
+
+        return new EnrollEventDto(paymentStatusDTO.getId(), eventDto.getPrice());
     }
 
     @Override

@@ -8,4 +8,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class EnrollEventDto {
     private Long paymentId;
+    private Double price;
 }
