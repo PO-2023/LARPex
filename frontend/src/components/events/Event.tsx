@@ -1,25 +1,25 @@
-import {EventDTO} from "@/class/dto/EventDTO";
-import {FC} from "react";
-import {TableCell, TableRow} from "../ui/table";
-import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
-import {cn, formatTime} from "@/lib/utils";
+import { EventDTO } from "@/class/dto/EventDTO";
+import { FC } from "react";
+import { TableCell, TableRow } from "../ui/table";
+import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
+import { cn, formatTime } from "@/lib/utils";
 
 interface EventProps {
   event: EventDTO;
 }
 
-const Event: FC<EventProps> = ({event}) => {
-  const {selectedEvent, setSelectedEvent} = useSelectedEvent();
-  const formattedDateTime = event.startTime.toLocaleDateString();
+const Event: FC<EventProps> = ({ event }) => {
+  const { selectedEvent, setSelectedEvent } = useSelectedEvent();
+
+  const startDate = new Date(event.startTime);
+  const endDate = new Date(event.endTime);
+
+  const formattedDateTime = startDate.toLocaleDateString();
 
   const startTime =
-    formatTime(event.startTime.getHours()) +
-    ":" +
-    formatTime(event.endTime.getMinutes());
+    formatTime(startDate.getHours()) + ":" + formatTime(startDate.getMinutes());
   const endTime =
-    formatTime(event.endTime.getHours()) +
-    ":" +
-    formatTime(event.endTime.getMinutes());
+    formatTime(endDate.getHours()) + ":" + formatTime(endDate.getMinutes());
 
   return (
     <TableRow
@@ -36,7 +36,7 @@ const Event: FC<EventProps> = ({event}) => {
           selectedEvent?.id === event.id && "font-bold text-indigo-400"
         )}
       >
-        {event.eventName}
+        {event.name}
       </TableCell>
       <TableCell>{event.game.title}</TableCell>
       <TableCell>{formattedDateTime}</TableCell>

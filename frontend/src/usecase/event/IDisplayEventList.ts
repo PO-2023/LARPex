@@ -1,18 +1,19 @@
-import {events} from "@/mock/eventList";
-import {DateRange} from "react-day-picker";
-import {EventsPresenter} from "@/class/presenter/EventsPresenter";
-
+import { DateRange } from "react-day-picker";
+import { EventsPresenter } from "@/class/presenter/EventsPresenter";
+import axios from "axios";
 export interface IDisplayEventList {
-    getEvents(dateRange: DateRange | undefined)
+  getEvents(dateRange: DateRange | undefined): any;
 }
 
 export class DisplayEventList implements IDisplayEventList {
-    constructor(private presenter: EventsPresenter) {
-    }
+  constructor(private presenter: EventsPresenter) {}
 
-    async getEvents() {
-        this.presenter.startLoading()
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        this.presenter.setEvents(events)
-    }
+  async getEvents() {
+    this.presenter.startLoading();
+    try {
+      const { data } = await axios.get("http://localhost:8080/event");
+      console.log(data);
+      this.presenter.setEvents(data);
+    } catch (e) {}
+  }
 }

@@ -4,7 +4,7 @@ export type EventDTO = {
   endTime: Date;
   players: number;
   price: number;
-  eventName: string;
+  name: string;
   game: GameDTO;
   status: string;
 };
