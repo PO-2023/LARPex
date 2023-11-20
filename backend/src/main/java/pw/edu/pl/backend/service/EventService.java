@@ -1,7 +1,6 @@
 package pw.edu.pl.backend.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pw.edu.pl.backend.interfaces.IEventService;
 import pw.edu.pl.backend.interfaces.IPaymentService;
@@ -10,17 +9,11 @@ import pw.edu.pl.backend.model.Status;
 import pw.edu.pl.backend.modelDto.*;
 import pw.edu.pl.backend.repository.EventRepository;
 import pw.edu.pl.backend.repository.GameRepository;
-import pw.edu.pl.backend.repositoryMapper.EventRepositoryMapper;
 import pw.edu.pl.backend.repositoryMapper.IEventRepositoryMapper;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -93,9 +86,10 @@ public class EventService implements IEventService {
 
         PaymentStatusDto paymentStatusDTO = paymentService.createPaymentRequest(new PaymentRequestDto("PayPal"));
 
-        return new EnrollEventDto(1L);
+        return new EnrollEventDto(paymentStatusDTO.getId());
     }
 
+    @Override
     public boolean unlockSlot(Long eventId) {
         EventDto eventWithId = eventRepository.findById(Math.toIntExact(eventId))
                 .map(EventMapper.INSTANCE::mapToEventDto)
