@@ -26,8 +26,8 @@ public class EventService implements IEventService {
     IEventRepositoryMapper eventRepositoryMapper;
 
     public List<EventWithGameDto> getAllEvents() {
-        var events = eventRepositoryMapper.getAllEventsMap();
-        return events.stream()
+        return eventRepositoryMapper.getAllEventsMap()
+                .stream()
                 .map(e -> eventRepositoryMapper.getEventWithGameDtoByDate(e))
                 .toList();
     }
@@ -43,12 +43,10 @@ public class EventService implements IEventService {
         } catch (DateTimeParseException exception) {
             throw exception;
         }
-        var events = eventRepositoryMapper.getAllEventsMap().stream()
+        return eventRepositoryMapper.getAllEventsMap().stream()
                 .filter(eventDto ->
                         eventDto.getStartTime().isAfter(dateTimeFrom)
                                 && eventDto.getEndTime().isBefore(dateTimeTo))
-                .toList();
-        return events.stream()
                 .map(e -> eventRepositoryMapper.getEventWithGameDtoByDate(e))
                 .toList();
     }
