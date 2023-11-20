@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaymentStatusDto {
-    Integer id;
+    Long id;
     String status;
 }

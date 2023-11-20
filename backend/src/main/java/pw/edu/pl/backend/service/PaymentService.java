@@ -3,6 +3,7 @@ package pw.edu.pl.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pw.edu.pl.backend.entity.PaymentEn;
+import pw.edu.pl.backend.interfaces.IEventService;
 import pw.edu.pl.backend.interfaces.IPaymentService;
 import pw.edu.pl.backend.modelDto.PaymentRequestDto;
 import pw.edu.pl.backend.modelDto.PaymentStatusDto;
@@ -14,13 +15,15 @@ public class PaymentService implements IPaymentService {
     @Autowired
     PaymentRepository paymentRepository;
 
+    IEventService eventService;
+
     public PaymentStatusDto createPaymentRequest(PaymentRequestDto paymentRequestDto) {
         PaymentEn paymentEn = new PaymentEn();
         paymentEn.setAmmount(0.0);
         paymentEn.setStatus("pending");
         paymentEn = paymentRepository.save(paymentEn);
 
-        return new PaymentStatusDto(paymentEn.getId(),paymentEn.getStatus());
+        return new PaymentStatusDto((long) paymentEn.getId(),paymentEn.getStatus());
     }
 
     public void processPayment(Integer paymentId,String method) throws Exception {
@@ -38,6 +41,8 @@ public class PaymentService implements IPaymentService {
         } else {
             paymentEn.setStatus(possibleStatuses[1]);
             paymentRepository.save(paymentEn);
+            //TODO: remove mocked value
+            eventService.unlockSlot(1L);
         }
     }
 }

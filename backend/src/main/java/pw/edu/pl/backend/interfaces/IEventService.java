@@ -14,4 +14,6 @@ public interface IEventService {
     EventDto getEventById(Long eventId);
 
     EnrollEventDto enrollToEvent(Long id, Long userId);
+
+    boolean unlockSlot(Long eventId);
 }
