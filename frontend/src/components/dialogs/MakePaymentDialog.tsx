@@ -1,26 +1,37 @@
-import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
-import {DialogType, useDialog} from "@/dispatcher/dialogDispatcher";
-import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
-import {Button} from "../ui/button";
-import {Form, FormDescription, FormField, FormItem, FormLabel, FormMessage,} from "@/components/ui/form";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { DialogType, useDialog } from "@/dispatcher/dialogDispatcher";
+import { useSelectedEvent } from "@/stores/selectedItemStore/selectedItemStore";
+import { Button } from "../ui/button";
+import {
+  Form,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
-import {useState} from "react";
-import {BadgeDollarSign, Loader2} from "lucide-react";
+import { useState } from "react";
+import { BadgeDollarSign, Loader2 } from "lucide-react";
 import * as z from "zod";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import PaymentTypeDropdown from "../events/PaymentTypeDropdown";
-import {CPayment} from "@/class/CPayment.ts";
+import { CPayment } from "@/class/CPayment.ts";
 
 const formSchema = z.object({
   methodType: z.string().min(1, "Musisz wybrać metodę płatności!"),
 });
 
 const MakePaymentDialog = () => {
-
   const cPayment = new CPayment();
-  const {closeDialog, dialogDispatcher, data} = useDialog();
-  const {selectedEvent} = useSelectedEvent();
+  const { closeDialog, dialogDispatcher, data } = useDialog();
+  const { selectedEvent } = useSelectedEvent();
 
   const paymentData = data?.paymentData;
 
@@ -34,28 +45,28 @@ const MakePaymentDialog = () => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     await cPayment.handlePayment(data, paymentData, setIsLoading);
-  }
+  };
 
   if (!selectedEvent) return;
 
   return (
-      <Dialog open={true} onOpenChange={closeDialog}>
-        <DialogContent className="min-h-[17rem] max-w-[25rem] ">
-          <DialogHeader>
-            <DialogTitle>
+    <Dialog open={true} onOpenChange={closeDialog}>
+      <DialogContent className="min-h-[17rem] max-w-[25rem] ">
+        <DialogHeader>
+          <DialogTitle>
             <span className="font-bold text-indigo-500 text-xl">
               Płatność 🛒
             </span>
-            </DialogTitle>
-          </DialogHeader>
-          <section className="flex flex-col justify-between mt-2">
-            <Form {...form}>
+          </DialogTitle>
+        </DialogHeader>
+        <section className="flex flex-col justify-between mt-2">
+          <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <section className="flex flex-col text-sm">
                 <div className="mb-3">
                   Kwota do zapłaty:
                   <div className="text-indigo-500 font-bold text-xl">
-                    {paymentData?.price}.00 zł
+                    {paymentData?.price}zł
                   </div>
                 </div>
                 <FormField
