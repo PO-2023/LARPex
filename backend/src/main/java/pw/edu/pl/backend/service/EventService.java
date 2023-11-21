@@ -23,7 +23,7 @@ public class EventService implements IEventService {
     public List<EventWithGameDto> getAllEvents() {
         return eventRepositoryMapper.getAllEventsMap()
                 .stream()
-                .map(e -> eventRepositoryMapper.getEventWithGameDtoByDate(e))
+                .map(e -> eventRepositoryMapper.getEventWithGameDto(e))
                 .toList();
     }
 
@@ -42,7 +42,7 @@ public class EventService implements IEventService {
                 .filter(eventDto ->
                         eventDto.getStartTime().isAfter(dateTimeFrom)
                                 && eventDto.getEndTime().isBefore(dateTimeTo))
-                .map(e -> eventRepositoryMapper.getEventWithGameDtoByDate(e))
+                .map(e -> eventRepositoryMapper.getEventWithGameDto(e))
                 .toList();
     }
 

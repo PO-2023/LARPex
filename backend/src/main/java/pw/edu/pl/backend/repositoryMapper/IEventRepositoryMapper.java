@@ -11,7 +11,7 @@ public interface IEventRepositoryMapper {
      List<EventDto> getAllEventsMap();
 
      EventDto getEventByIdMap(Long eventId);
-     EventWithGameDto getEventWithGameDtoByDate(EventDto event);
+     EventWithGameDto getEventWithGameDto(EventDto event);
      void saveEvent(EventDto event);
 
 }
