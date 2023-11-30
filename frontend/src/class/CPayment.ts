@@ -1,6 +1,5 @@
-import { MakePayment } from "@/gateway/MakePayment.ts";
-import { IMakePayment } from "@/gateway/IMakePayment.ts";
-import * as z from "zod";
+import {MakePayment} from "@/gateway/MakePayment.ts";
+import {IMakePayment} from "@/gateway/IMakePayment.ts";
 import {DialogType, useDialog} from "@/dispatcher/dialogDispatcher.ts";
 
 export class CPayment {
@@ -15,7 +14,9 @@ export class CPayment {
     setIsLoading(true);
     this.makePayment(paymentData?.paymentId, values.methodType).then((response) => {
       if (response) {
-        this.dispatcher(DialogType.SUCCESS_DIALOG);
+        this.dispatcher(DialogType.SUCCESS_DIALOG, {
+          message: "Płatność zakończona pomyślnie",
+        });
       } else {
         this.dispatcher(DialogType.ERROR_DIALOG, {
             message: "Niepowodzenie płatności",

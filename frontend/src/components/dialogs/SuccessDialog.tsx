@@ -4,7 +4,7 @@ import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
 import {Button} from "../ui/button";
 
 const SuccessDialog = () => {
-  const {closeDialog} = useDialog();
+  const {closeDialog, data} = useDialog();
   const {selectedEvent} = useSelectedEvent();
 
   if (!selectedEvent) return;
@@ -15,7 +15,7 @@ const SuccessDialog = () => {
           <DialogHeader>
             <DialogTitle>
             <span className="font-bold text-indigo-500 text-xl">
-              Płatność zakończona pomyślnie
+              {data.message}
             </span>
             </DialogTitle>
             <section className="flex flex-col gap-1 text-sm">
