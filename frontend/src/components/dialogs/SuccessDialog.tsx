@@ -1,13 +1,9 @@
 import {Dialog, DialogContent, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
 import {useDialog} from "@/dispatcher/dialogDispatcher";
-import {useSelectedEvent} from "@/stores/selectedItemStore/selectedItemStore";
 import {Button} from "../ui/button";
 
 const SuccessDialog = () => {
   const {closeDialog, data} = useDialog();
-  const {selectedEvent} = useSelectedEvent();
-
-  if (!selectedEvent) return;
 
   return (
       <Dialog open={true} onOpenChange={closeDialog}>

@@ -1,30 +1,40 @@
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
-import { useDialog } from "@/dispatcher/dialogDispatcher";
-import { useState } from "react";
-import { QrReader } from "react-qr-reader";
+import {Dialog, DialogContent, DialogHeader} from "@/components/ui/dialog";
+import {useDialog} from "@/dispatcher/dialogDispatcher";
+import {IQRPresenter, QRPresenter} from "@/class/presenter/QRPresenter";
+import {IInteractWithQR, InteractWithQR} from "@/usecase/qr/IInteractWithQR";
+import {QRController} from "@/class/controller/QRController";
+import {useState} from "react";
+import {QrReader} from 'react-qr-reader';
 
 const ScanQRDialog = () => {
-  const { closeDialog } = useDialog();
-  const [data, setData] = useState("No result");
-  return (
-    <Dialog open={true} onOpenChange={closeDialog}>
-      <DialogContent className="min-h-[20rem] max-w-[19rem] flex flex-col">
-        <DialogHeader></DialogHeader>
-        <QrReader
-          onResult={(result, error) => {
-            if (!!result) {
-              setData(result?.text);
-            }
+    const [isDecoding, setIsDecoding] = useState(true)
+    const {dialogDispatcher, closeDialog, type} = useDialog();
 
-            if (!!error) {
-              console.info(error);
-            }
-          }}
-          style={{ width: "100%" }}
-        />
-      </DialogContent>
-    </Dialog>
-  );
+    const presenter: IQRPresenter = new QRPresenter(dialogDispatcher)
+    const interactWithQR: IInteractWithQR = new InteractWithQR(presenter)
+    const controller = new QRController(interactWithQR, presenter)
+
+    return (
+        <Dialog open={true} onOpenChange={closeDialog}>
+            <DialogContent className="min-h-[20rem] max-w-[19rem] flex flex-col">
+                <DialogHeader></DialogHeader>
+                <QrReader
+                    onResult={(result, error) => {
+                        if (!!result) {
+                            console.log(result?.text)
+                            controller.onResult(result)
+                        }
+
+                        if (!!error && JSON.stringify(error) != JSON.stringify({})) {
+                            console.log(error);
+                            controller.onError(error)
+                        }
+                    }}
+                    style={{width: '100%'}}
+                />
+            </DialogContent>
+        </Dialog>
+    );
 };
 
 export default ScanQRDialog;

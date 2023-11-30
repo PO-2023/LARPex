@@ -1,7 +1,7 @@
 import EventDescriptionDialog from "@/components/dialogs/EventDescriptionDialog";
 import MakePaymentDialog from "@/components/dialogs/MakePaymentDialog";
 import SuccessDialog from "@/components/dialogs/SuccessDialog";
-import { DialogType, useDialog } from "@/dispatcher/dialogDispatcher";
+import {DialogType, useDialog} from "@/dispatcher/dialogDispatcher";
 import ErrorDialog from "@/components/dialogs/ErrorDialog.tsx";
 import ScanQRDialog from "@/components/dialogs/ScanQRDialog";
 
@@ -9,6 +9,7 @@ const DialogProvider = () => {
   const { type } = useDialog();
 
   function renderSwitch(dialogType: DialogType | undefined) {
+    console.log('DialogType', dialogType)
     switch (dialogType) {
       case DialogType.MAKE_PAYMENT_DIALOG:
         return <MakePaymentDialog />;

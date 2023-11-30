@@ -10,32 +10,30 @@ import PlayerPanelWindow from "./views/PlayerPanelWindow.tsx";
 import {QueryProvider} from "./providers/QueryProvider.tsx";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-        <>
-        <Header />
-        <DialogProvider />
-      </>
-    ),
-    children: [
-      {
-        path: "/events",
-        element: <EventsWindow/>,
-      },
-      {
-        path: "/play",
+    {
+        path: "/",
+        element: (
+            <>
+                <Header/>
+                <DialogProvider/>
+            </>
+        ),
+        children: [
+            {
+                path: "/events",
+                element: <EventsWindow/>,
+            },
+            {
+                path: "/play",
 
-        children: [{ path: ":id", element: <PlayerPanelWindow /> }],
-      },
-    ],
-  },
+                children: [{path: ":id", element: <PlayerPanelWindow/>}],
+            },
+        ],
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
     <QueryProvider>
-      <RouterProvider router={router} />
+        <RouterProvider router={router}/>
     </QueryProvider>
-  </React.StrictMode>
 );
