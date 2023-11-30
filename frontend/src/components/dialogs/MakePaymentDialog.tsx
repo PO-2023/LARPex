@@ -30,7 +30,7 @@ const formSchema = z.object({
 
 const MakePaymentDialog = () => {
   const cPayment = new CPayment();
-  const { closeDialog, dialogDispatcher, data } = useDialog();
+  const { closeDialog, data } = useDialog();
   const { selectedEvent } = useSelectedEvent();
 
   const paymentData = data?.paymentData;
