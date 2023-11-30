@@ -3,12 +3,10 @@ import {useDialog} from "@/dispatcher/dialogDispatcher";
 import {IQRPresenter, QRPresenter} from "@/class/presenter/QRPresenter";
 import {IInteractWithQR, InteractWithQR} from "@/usecase/qr/IInteractWithQR";
 import {QRController} from "@/class/controller/QRController";
-import {useState} from "react";
 import {QrReader} from 'react-qr-reader';
 
 const ScanQRDialog = () => {
-    const [isDecoding, setIsDecoding] = useState(true)
-    const {dialogDispatcher, closeDialog, type} = useDialog();
+    const {dialogDispatcher, closeDialog} = useDialog();
 
     const presenter: IQRPresenter = new QRPresenter(dialogDispatcher)
     const interactWithQR: IInteractWithQR = new InteractWithQR(presenter)
@@ -21,12 +19,10 @@ const ScanQRDialog = () => {
                 <QrReader
                     onResult={(result, error) => {
                         if (!!result) {
-                            console.log(result?.text)
-                            controller.onResult(result)
+                            controller.onResult(result?.text)
                         }
 
                         if (!!error && JSON.stringify(error) != JSON.stringify({})) {
-                            console.log(error);
                             controller.onError(error)
                         }
                     }}
