@@ -10,7 +10,7 @@ const ScanQRDialog = () => {
 
     const presenter: IQRPresenter = new QRPresenter(dialogDispatcher)
     const interactWithQR: IInteractWithQR = new InteractWithQR(presenter)
-    const controller = new QRController(interactWithQR, presenter)
+    const controller = new QRController(interactWithQR)
 
     return (
         <Dialog open={true} onOpenChange={closeDialog}>

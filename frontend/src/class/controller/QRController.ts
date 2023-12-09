@@ -1,20 +1,19 @@
-import {IQRPresenter} from "@/class/presenter/QRPresenter";
 import {IInteractWithQR} from "@/usecase/qr/IInteractWithQR";
+import {ActionDTO} from "@/class/dto/qr/ActionDTO";
 
 export class QRController {
-    constructor(private interactWithQR: IInteractWithQR, private presenter: IQRPresenter) {
+    constructor(private interactWithQR: IInteractWithQR) {
     }
 
     onResult(result: string | undefined) {
         if (!!result) {
-            this.presenter.dispatchMessage(result)
-            // this.interactWithQR.interact(new ActionDTO(1, 2))
+            this.interactWithQR.interact(new ActionDTO(1, 2))
         } else {
-            this.presenter.dispatchError("Błąd zczytywania kodu QR")
+            this.interactWithQR.handleError("Błąd zczytywania kodu QR")
         }
     }
 
     onError(error: string) {
-        this.presenter.dispatchError(error)
+        this.interactWithQR.handleError(error)
     }
 }

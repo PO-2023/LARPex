@@ -3,6 +3,8 @@ import {IQRPresenter} from "@/class/presenter/QRPresenter";
 
 export interface IInteractWithQR {
     interact(action: ActionDTO)
+
+    handleError(error: String)
 }
 
 export class InteractWithQR implements IInteractWithQR {
@@ -16,5 +18,9 @@ export class InteractWithQR implements IInteractWithQR {
             //  mock error/message
         } catch (e) {
         }
+    }
+
+    handleError(error: String) {
+        this.presenter.dispatchError(error)
     }
 }
