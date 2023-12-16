@@ -14,6 +14,7 @@ public class Player {
     private String surname;
     private String nickname;
     private Long characterId;
+    private Long equipmentId;
     private Long playId;
     private int rank;
 }
