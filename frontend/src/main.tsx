@@ -8,6 +8,8 @@ import Header from "./components/Header.tsx";
 import DialogProvider from "./providers/DialogProvider.tsx";
 import PlayerPanelWindow from "./views/PlayerPanelWindow.tsx";
 import {QueryProvider} from "./providers/QueryProvider.tsx";
+import EquipmentView from "@/components/equipment/EquipmentView.tsx";
+import {EquipmentDTO} from "@/class/dto/EquipmentDTO.tsx";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
                 path: "/play",
 
                 children: [{path: ":id", element: <PlayerPanelWindow/>}],
+            },
+            {
+                path: "/equipment",
+                element: <EquipmentView/>,
             },
         ],
     },

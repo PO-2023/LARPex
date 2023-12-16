@@ -44,7 +44,7 @@ const Header = () => {
             )}
           >
             {
-              activePlayData&&<JoinPlayButton onJoinPlay={activePlayData.id}/>
+              <JoinPlayButton onJoinPlay={activePlayData?.id}/>
             }
             <Link to={`/events`}>
               <Button
