@@ -23,6 +23,9 @@ public class PlayerEn {
     @Basic
     @Column(name = "rank")
     private Integer rank;
+    @Basic
+    @Column(name = "equipment_id")
+    private Long equipmentId;
 
     public Long getId() {
         return id;
@@ -62,6 +65,12 @@ public class PlayerEn {
 
     public void setRank(Integer rank) {
         this.rank = rank;
+    }
+    public Long getEquipmentId() {
+        return equipmentId;
+    }
+    public void setEquipmentId(Long equipmentId) {
+        this.equipmentId = equipmentId;
     }
 
     @Override
