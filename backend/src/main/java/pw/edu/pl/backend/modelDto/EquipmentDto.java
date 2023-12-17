@@ -19,5 +19,8 @@ public class EquipmentDto {
         this.playerId = playerId;
         this.size = size;
         this.items = items;
+        for(ItemDto item : items) {
+            this.currentCapacity += item.getWeight();
+        }
     }
 }

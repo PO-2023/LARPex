@@ -83,7 +83,7 @@ public class EquipmentRepositoryMapper implements IEquipmentRepositoryMapper{
             boolean breakFlag = false;
             for(ItemDto itemDto : itemDtoList) {
                 if(itemDto.getId() == item.getId()) {
-                    itemDto.setQuantity(itemDto.getQuantity() + 1);
+                    itemDto.incrementQuantity();
                     breakFlag = true;
                     break;
                 }
@@ -91,7 +91,7 @@ public class EquipmentRepositoryMapper implements IEquipmentRepositoryMapper{
             if(breakFlag) {
                 continue;
             }
-            itemDtoList.add(new ItemDto(item.getId(), item.getName(), item.getType(), item.getDescription()));
+            itemDtoList.add(new ItemDto(item.getId(), item.getName(), item.getType(), item.getDescription(), item.getWeight(), item.getPictureUrl()));
         }
         return itemDtoList;
     }
