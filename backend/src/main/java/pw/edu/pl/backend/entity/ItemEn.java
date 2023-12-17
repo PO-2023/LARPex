@@ -20,6 +20,15 @@ public class ItemEn {
     @Basic
     @Column(name = "description")
     private String description;
+    @Basic
+    @Column(name = "quantity")
+    private Integer quantity;
+    @Basic
+    @Column(name = "picture_url")
+    private String pictureUrl;
+    @Basic
+    @Column(name = "weight")
+    private Double weight;
 
     public long getId() {
         return id;
@@ -53,16 +62,40 @@ public class ItemEn {
         this.description = description;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ItemEn itemEn = (ItemEn) o;
-        return id == itemEn.id && Objects.equals(name, itemEn.name) && Objects.equals(type, itemEn.type) && Objects.equals(description, itemEn.description);
+        return id == itemEn.id && Objects.equals(name, itemEn.name) && Objects.equals(type, itemEn.type) && Objects.equals(description, itemEn.description) && Objects.equals(quantity, itemEn.quantity) && Objects.equals(pictureUrl, itemEn.pictureUrl) && Objects.equals(weight, itemEn.weight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, type, description);
+        return Objects.hash(id, name, type, description, quantity, pictureUrl, weight);
     }
 }
