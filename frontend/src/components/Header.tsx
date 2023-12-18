@@ -17,7 +17,7 @@ const Header = () => {
 
   const playActive = location.pathname.includes("play");
   const eventClient = new EventApiClient();
-  const userId = 1;
+  const userId = 2;
 
   useEffect(() => {
     eventClient.getActiveEvent(userId)
