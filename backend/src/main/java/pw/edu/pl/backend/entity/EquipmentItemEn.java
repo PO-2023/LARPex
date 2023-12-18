@@ -17,6 +17,9 @@ public class EquipmentItemEn {
     @Basic
     @Column(name = "item_id")
     private Long itemId;
+    @Basic
+    @Column(name = "quantity")
+    private Integer quantity;
 
     public long getId() {
         return id;
@@ -42,16 +45,24 @@ public class EquipmentItemEn {
         this.itemId = itemId;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EquipmentItemEn that = (EquipmentItemEn) o;
-        return id == that.id && Objects.equals(equipmentId, that.equipmentId) && Objects.equals(itemId, that.itemId);
+        return id == that.id && Objects.equals(equipmentId, that.equipmentId) && Objects.equals(itemId, that.itemId) && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, equipmentId, itemId);
+        return Objects.hash(id, equipmentId, itemId, quantity);
     }
 }
