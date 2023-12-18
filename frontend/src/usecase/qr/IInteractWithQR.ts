@@ -1,5 +1,6 @@
 import {ActionDTO} from "@/class/dto/qr/ActionDTO";
 import {IQRPresenter} from "@/class/presenter/QRPresenter";
+import axios from "axios";
 
 export interface IInteractWithQR {
     interact(action: ActionDTO)
@@ -12,11 +13,14 @@ export class InteractWithQR implements IInteractWithQR {
     }
 
     async interact(action: ActionDTO) {
-        this.presenter.dispatchMessage("Testowo jest OK")
         try {
-            // TODO wait for backend
-            //  mock error/message
+            const {data: result} = await axios.post(
+                `http://localhost:8080/action`,
+                action,
+            );
+            this.presenter.dispatchMessage(result.message)
         } catch (e) {
+            this.presenter.dispatchMessage("Błąd dodawania przedmiotu")
         }
     }
 

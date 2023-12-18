@@ -7,7 +7,12 @@ export class QRController {
 
     onResult(result: string | undefined) {
         if (!!result) {
-            this.interactWithQR.interact(new ActionDTO(1, 2))
+            try {
+                const qrData = JSON.parse(result)
+                this.interactWithQR.interact(new ActionDTO(qrData.actionType, qrData.itemId, qrData.itemQuantity, 1))
+            } catch (e) {
+                this.interactWithQR.handleError("Błąd zczytywania kodu QR")
+            }
         } else {
             this.interactWithQR.handleError("Błąd zczytywania kodu QR")
         }

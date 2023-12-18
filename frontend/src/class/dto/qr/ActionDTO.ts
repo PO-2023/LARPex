@@ -1,4 +1,4 @@
 export class ActionDTO {
-    constructor(public actionId: number, public playerId: number) {
+    constructor(public actionType: string, public itemId: number, public itemQuantity: number, public playerId: number) {
     }
 }
