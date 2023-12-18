@@ -2,11 +2,14 @@ package pw.edu.pl.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pw.edu.pl.backend.entity.DoorEn;
 import pw.edu.pl.backend.entity.EquipmentItemEn;
 import pw.edu.pl.backend.interfaces.IActionService;
+import pw.edu.pl.backend.model.DoorStatus;
 import pw.edu.pl.backend.modelDto.ActionDto;
 import pw.edu.pl.backend.modelDto.ActionResultDto;
 import pw.edu.pl.backend.modelDto.ActionType;
+import pw.edu.pl.backend.repository.DoorRepository;
 import pw.edu.pl.backend.repository.EquipmentItemRepository;
 import pw.edu.pl.backend.repository.ItemRepository;
 import pw.edu.pl.backend.repositoryMapper.IEquipmentRepositoryMapper;
@@ -22,6 +25,8 @@ public class ActionService implements IActionService {
     EquipmentItemRepository equipmentItemRepository;
     @Autowired
     ItemRepository itemRepository;
+    @Autowired
+    DoorRepository doorRepository;
 
     public ActionResultDto runQRAction(ActionDto actionDto) {
         if (actionDto.getActionType() == ActionType.ADD_ITEM) {
@@ -53,10 +58,20 @@ public class ActionService implements IActionService {
             existingItem.get().setQuantity((int) (currentQuantity + actionDto.getItemQuantity()));
             equipmentItemRepository.save(existingItem.get());
             return new ActionResultDto("Added quantity to item", "Success");
-        }else {
+        } else if (actionDto.getActionType() == ActionType.TOGGLE_DOOR) {
+            DoorEn door = doorRepository.findById(actionDto.getDoorId()).orElse(null);
+            if (door == null) {
+                return new ActionResultDto("Door not exist", "Failed");
+            }
+            if (door.getStatus() == DoorStatus.OPEN) {
+                door.setStatus(DoorStatus.CLOSED);
+            } else {
+                door.setStatus(DoorStatus.OPEN);
+            }
+            doorRepository.save(door);
+            return new ActionResultDto("Door opened", "Success");
+        } else {
             return new ActionResultDto("Action type only ADD_ITEM ", "Failed");
-
         }
     }
-
 }
