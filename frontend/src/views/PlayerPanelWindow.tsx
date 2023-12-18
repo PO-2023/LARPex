@@ -8,6 +8,7 @@ import {EquipmentDispatcher} from "@/dispatcher/EquipmentDispatcher.tsx";
 import {EquipmentManager} from "@/components/equipment/EquipmentManager.tsx";
 import {PlayerWithActiveEventDto} from "@/class/dto/PlayerWithActiveEventDto.ts";
 import {EventApiClient} from "@/gateway/EventApiClient.ts";
+import {cn} from "@/lib/utils.ts";
 
 const PlayerPanelWindow: React.FC = () => {
     const [activePlayData, setActivePlayData] = useState<PlayerWithActiveEventDto | null>(null);
@@ -53,18 +54,26 @@ const PlayerPanelWindow: React.FC = () => {
                 flexWrap: "wrap",
                 rowGap: "10px"
             }}>
-                <Button onClick={() => dialogDispatcher(DialogType.SCAN_QR_DIALOG)}>
+                <Button className={cn(
+                    "cursor-pointer flex bg-indigo-500 hover:bg-indigo-400 gap-1 "
+                )} onClick={() => dialogDispatcher(DialogType.SCAN_QR_DIALOG)}>
                     Scan
                 </Button>
-                <Button onClick={() => equipmentManager.displayEquipment(activePlayData?.id)}
+                <Button className={cn(
+                    "cursor-pointer flex bg-indigo-500 hover:bg-indigo-400 gap-1 "
+                )} onClick={() => equipmentManager.displayEquipment(activePlayData?.id)}
                 >
                     Wyświetl ekwipunek
                 </Button>
-                <Button
+                <Button className={cn(
+                    "cursor-pointer flex bg-indigo-500 hover:bg-indigo-400 gap-1 "
+                )}
                 >
                     Wyświetl mapę lokacji
                 </Button>
-                <Button
+                <Button className={cn(
+                    "cursor-pointer flex bg-indigo-500 hover:bg-indigo-400 gap-1 "
+                )}
                 >
                     Sprawdź aktualny stan gry
                 </Button>
