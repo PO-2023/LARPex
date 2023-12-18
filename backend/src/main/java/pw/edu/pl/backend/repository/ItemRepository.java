@@ -6,4 +6,5 @@ import pw.edu.pl.backend.entity.ItemEn;
 
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEn, Long> {
+    ItemEn findAllById(Long itemId);
 }
