@@ -35,8 +35,7 @@ class EquipmentView extends Component<any, any> {
                     <Gamepad2/>
                     <h1 className="sm:block">Cofnij</h1>
                 </Button>
-                <div>Zajęte miejsce: {this.equipment.currentCapacity}</div>
-                <div>Pojemność: {this.equipment.maxCapacity}</div>
+                <div>Zajęte miejsce: {this.equipment.currentCapacity}/{this.equipment.size}</div>
                 <Table className="mt-5 sm:mt-5 text-xs sm:text-sm sm:table">
                     <TableHeader>
                         <TableRow>
