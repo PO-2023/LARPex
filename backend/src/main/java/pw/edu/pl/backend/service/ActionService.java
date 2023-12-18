@@ -3,6 +3,7 @@ package pw.edu.pl.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pw.edu.pl.backend.entity.EquipmentItemEn;
+import pw.edu.pl.backend.entity.ItemEn;
 import pw.edu.pl.backend.interfaces.IActionService;
 import pw.edu.pl.backend.modelDto.ActionDto;
 import pw.edu.pl.backend.modelDto.ActionResultDto;
@@ -42,7 +43,8 @@ public class ActionService implements IActionService {
                     newItem.setEquipmentId(equipment.getId());
                     newItem.setItemId(actionDto.getItemId());
                     equipmentItemRepository.save(newItem);
-                    return new ActionResultDto("Added new item", "Success");
+                    ItemEn item = itemRepository.findById(actionDto.getItemId()).get();
+                    return new ActionResultDto("Added new item: "+item.getName(), "Success");
                 } else {
                     return new ActionResultDto("Item id does not exist", "Failed");
                 }
@@ -52,7 +54,8 @@ public class ActionService implements IActionService {
             System.out.println(currentQuantity);
             existingItem.get().setQuantity((int) (currentQuantity + actionDto.getItemQuantity()));
             equipmentItemRepository.save(existingItem.get());
-            return new ActionResultDto("Added quantity to item", "Success");
+            ItemEn item = itemRepository.findById(actionDto.getItemId()).get();
+            return new ActionResultDto("Added quantity"+actionDto.getItemQuantity().toString()+"to item: "+item.getName(), "Success");
         }else {
             return new ActionResultDto("Action type only ADD_ITEM ", "Failed");
 
