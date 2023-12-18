@@ -12,4 +12,5 @@ public class ActionDto {
     private Long itemId;
     private Long itemQuantity;
     private Long playerId;
+    private Long doorId;
 }

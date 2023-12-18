@@ -1,5 +1,6 @@
 package pw.edu.pl.backend.modelDto;
 
 public enum ActionType {
-    ADD_ITEM
+    ADD_ITEM,
+    TOGGLE_DOOR
 }

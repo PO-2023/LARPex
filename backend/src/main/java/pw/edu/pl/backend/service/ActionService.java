@@ -49,10 +49,11 @@ public class ActionService implements IActionService {
             }
 
             int currentQuantity = existingItem.get().getQuantity() != null ? existingItem.get().getQuantity() : 0;
+            System.out.println(currentQuantity);
             existingItem.get().setQuantity((int) (currentQuantity + actionDto.getItemQuantity()));
             equipmentItemRepository.save(existingItem.get());
             return new ActionResultDto("Added quantity to item", "Success");
-        } else {
+        }else {
             return new ActionResultDto("Action type only ADD_ITEM ", "Failed");
 
         }

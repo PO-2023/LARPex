@@ -12,7 +12,7 @@ const Item: FC<ItemProps> = ({item}) => {
         <TableRow>
             <TableCell>
                 <div>
-                    <img alt="name" src={item.pictureUrl} width={18} height={18}/>
+                    <img alt="name" src={item.pictureUrl} width={64} height={64}/>
                 </div>
             </TableCell>
             <TableCell>{item.name}</TableCell>

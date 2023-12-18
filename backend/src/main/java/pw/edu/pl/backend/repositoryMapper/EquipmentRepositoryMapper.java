@@ -24,6 +24,8 @@ import pw.edu.pl.backend.repository.PlayerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class EquipmentRepositoryMapper implements IEquipmentRepositoryMapper{
@@ -56,6 +58,17 @@ public class EquipmentRepositoryMapper implements IEquipmentRepositoryMapper{
         }
         System.out.println(equipment.getSize());
         List<EquipmentItemEn> equipmentItemEnList = equipmentItemRepository.findByEquipmentId(equipment.getId());
+
+        List<ItemDto> listOfItemDtos2 = equipmentItemEnList.stream()
+                .map(equipmentItemEn -> {
+                    ItemEn itemEn = itemRepository.findById(equipmentItemEn.getItemId()).orElse(null);
+                    if(itemEn == null) {
+                        return null;
+                    }
+                    return new ItemDto(itemEn.getId(), itemEn.getName(), itemEn.getType(), itemEn.getDescription(), equipmentItemEn.getQuantity(), itemEn.getWeight().floatValue(), itemEn.getPictureUrl());
+                }).toList();
+
+
         List<Long> itemIdList = equipmentItemEnList.stream().map(EquipmentItemEn::getItemId).toList();
         List<ItemEn> itemEnListUniqueValues = itemRepository.findAllById(itemIdList);
         List<ItemEn> itemEnList = new ArrayList<>();
@@ -72,7 +85,7 @@ public class EquipmentRepositoryMapper implements IEquipmentRepositoryMapper{
 
 
 //        idk czy max size to jest to samo co max capacity
-        EquipmentDto equipmentDto = new EquipmentDto(equipment.getId(), player.getId(), equipment.getSize(), listOfItemDtos);
+        EquipmentDto equipmentDto = new EquipmentDto(equipment.getId(), player.getId(), equipment.getSize(), listOfItemDtos2);
 
         return equipmentDto;
     }
