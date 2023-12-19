@@ -4,4 +4,5 @@ import pw.edu.pl.backend.modelDto.PlayDto;
 
 public interface IPlayService {
     PlayDto getAvailablePlays(Long userId);
+    PlayDto joinPlay(Long userId, Long playId);
 }

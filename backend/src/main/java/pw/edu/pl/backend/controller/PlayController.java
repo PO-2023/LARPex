@@ -17,5 +17,9 @@ public class PlayController {
     public ResponseEntity<PlayDto> getAvailablePlays() {
         return ResponseEntity.ok().body(iPlayService.getAvailablePlays(1L));
     }
+    @GetMapping("/play/{id}")
+    public ResponseEntity<PlayDto> joinPlay(Long playId) {
+        return ResponseEntity.ok().body(iPlayService.joinPlay(playId, 1L));
+    }
 
 }
