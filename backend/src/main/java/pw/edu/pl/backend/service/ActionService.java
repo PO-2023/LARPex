@@ -53,6 +53,10 @@ public class ActionService implements IActionService {
                     return new ActionResultDto("Item id does not exist", "Failed");
                 }
             }
+            existingItem = equipmentItemRepository
+                    .findByEquipmentIdAndItemId(equipment.getId(), actionDto.getItemId())
+                    .stream()
+                    .findFirst();
 
             int currentQuantity = existingItem.get().getQuantity() != null ? existingItem.get().getQuantity() : 0;
             System.out.println(currentQuantity);
