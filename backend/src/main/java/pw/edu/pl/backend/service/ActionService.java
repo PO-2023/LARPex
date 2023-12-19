@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pw.edu.pl.backend.entity.DoorEn;
 import pw.edu.pl.backend.entity.EquipmentItemEn;
+import pw.edu.pl.backend.entity.ItemEn;
 import pw.edu.pl.backend.interfaces.IActionService;
-import pw.edu.pl.backend.model.DoorStatus;
 import pw.edu.pl.backend.modelDto.ActionDto;
 import pw.edu.pl.backend.modelDto.ActionResultDto;
 import pw.edu.pl.backend.modelDto.ActionType;
@@ -47,7 +47,8 @@ public class ActionService implements IActionService {
                     newItem.setEquipmentId(equipment.getId());
                     newItem.setItemId(actionDto.getItemId());
                     equipmentItemRepository.save(newItem);
-                    return new ActionResultDto("Added new item", "Success");
+                    ItemEn item = itemRepository.findById(actionDto.getItemId()).get();
+                    return new ActionResultDto("Added new item: " + item.getName(), "Success");
                 } else {
                     return new ActionResultDto("Item id does not exist", "Failed");
                 }
@@ -57,19 +58,24 @@ public class ActionService implements IActionService {
             System.out.println(currentQuantity);
             existingItem.get().setQuantity((int) (currentQuantity + actionDto.getItemQuantity()));
             equipmentItemRepository.save(existingItem.get());
-            return new ActionResultDto("Added quantity to item", "Success");
+            ItemEn item = itemRepository.findById(actionDto.getItemId()).get();
+            return new ActionResultDto("Added " + actionDto.getItemQuantity().toString() + " of " + item.getName(), "Success");
         } else if (actionDto.getActionType() == ActionType.TOGGLE_DOOR) {
             DoorEn door = doorRepository.findById(actionDto.getDoorId()).orElse(null);
             if (door == null) {
                 return new ActionResultDto("Door not exist", "Failed");
             }
-            if (door.getStatus() == DoorStatus.OPEN) {
-                door.setStatus(DoorStatus.CLOSED);
+            if (door.getStatus().equals("open")) {
+                door.setStatus("closed");
+                doorRepository.save(door);
+                return new ActionResultDto("Door closed", "Success");
+
             } else {
-                door.setStatus(DoorStatus.OPEN);
+                door.setStatus("open");
+                doorRepository.save(door);
+                return new ActionResultDto("Door opened", "Success");
+
             }
-            doorRepository.save(door);
-            return new ActionResultDto("Door opened", "Success");
         } else {
             return new ActionResultDto("Action type only ADD_ITEM ", "Failed");
         }

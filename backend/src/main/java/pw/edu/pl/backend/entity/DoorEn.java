@@ -1,7 +1,6 @@
 package pw.edu.pl.backend.entity;
 
 import jakarta.persistence.*;
-import pw.edu.pl.backend.model.DoorStatus;
 
 import java.util.Objects;
 
@@ -14,7 +13,7 @@ public class DoorEn {
     private long id;
     @Basic
     @Column(name = "status")
-    private DoorStatus status;
+    private String status;
 
     public long getId() {
         return id;
@@ -24,11 +23,11 @@ public class DoorEn {
         this.id = id;
     }
 
-    public DoorStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(DoorStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
