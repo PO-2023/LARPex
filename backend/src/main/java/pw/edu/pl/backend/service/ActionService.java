@@ -46,6 +46,7 @@ public class ActionService implements IActionService {
                     EquipmentItemEn newItem = new EquipmentItemEn();
                     newItem.setEquipmentId(equipment.getId());
                     newItem.setItemId(actionDto.getItemId());
+                    newItem.setQuantity(actionDto.getItemQuantity().intValue());
                     equipmentItemRepository.save(newItem);
                     ItemEn item = itemRepository.findById(actionDto.getItemId()).get();
                     return new ActionResultDto("Added new item: " + item.getName(), "Success");
